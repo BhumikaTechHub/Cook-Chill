@@ -1,0 +1,42 @@
+{
+    "header": {
+        "title": "Cook & Chill",
+        "buttons": ["Home", "About", "Contact Us", "Login", "Sign Up"]
+    },
+    "about": {
+        "title": "ABOUT US",
+        "description": "At Cook & Chill, our purpose is to showcase the best and most interesting aspects of arts and entertainment. We bring you the latest news, reviews, and features on everything from movies and TV shows."
+    },
+    "featuredSections": [
+        {
+            "image": "Cooking.webp",
+            "text": "Welcome to Delicious Cooking"
+        },
+        {
+            "image": "Korean Poetry.jpg",
+            "text": "Lights, Camera, Snack-tion"
+        }
+    ],
+    "features": [
+        "Cook Whatever You Want, Anytime You Want!",
+        "Upload Your Own Recipe and Share the Flavor!",
+        "Give Reviews, Get Feedback, and Perfect Your Recipes!"
+    ],
+    "topReviews": [
+        "Top Reviews for All Your Entertainment Needs!",
+        "Freely Share Your Thoughts on the Latest Movies!",
+        "Genre-Specific Recommendations and More!"
+    ],
+    "faqs": [
+        "How can I upload my own recipe or review?",
+        "How do I get feedback on my recipe or review?",
+        "What types of recipes and entertainment reviews can I submit?",
+        "How do you choose featured recipes or reviews?"
+    ],
+    "contact": {
+        "email": "info@cookchill.com",
+        "discoverText": "Ready to Discover?"
+    }
+}
+
+

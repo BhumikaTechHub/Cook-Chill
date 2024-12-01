@@ -1,0 +1,59 @@
+{
+    "header": {
+        "links": [
+            { "name": "Home", "href": "homepage.html" },
+            { "name": "About Us", "href": "AboutPage.html" },
+            { "name": "Contact", "href": "ContactUs.html" }
+        ]
+    },
+    "sections": [
+        {
+            "link": "cook2.html",
+            "text": "FIND YOUR NEXT CULINARY ADVENTURE",
+            "image": "searchyourfood.jpeg",
+            "alt": "Search Discover Image",
+            "bgColor": "#ecb879",
+            "textColor": "#ffffff",
+            "fontsize":"50px"
+        },
+        {
+            "link": "cook3.html",
+            "text": "SHARE YOUR CULINARY CREATIONS",
+            "image": "upload.jpeg",
+            "alt": "Upload Image",
+            "bgColor": "#f4a23e",
+            "textColor": "#ffffff",
+            "fontsize":"50px"
+        },
+        {
+            "link": "cook4.html",
+            "text": "SHARE YOUR FOODIE THOUGHTS",
+            "image": "critic.jpeg",
+            "alt": "Critic Image",
+            "bgColor": "#e0871a",
+            "textColor": "#ffffff",
+            "fontsize":"50px"
+        }
+    ],
+    "footer": {
+        "email": "info@cookchill.com",
+        "discoverText": "Ready to Discover?",
+        "policies": [
+            { "name": "Privacy Policy", "href": "#" },
+            { "name": "Terms & Conditions", "href": "#" }
+        ],
+        "socialIcons": [
+            { "icon": "facebook.svg", "link": "#" },
+            { "icon": "twitter.svg", "link": "#" },
+            { "icon": "instagram.svg", "link": "#" }
+        ]
+    }
+}
+
+
+
+
+
+
+
+

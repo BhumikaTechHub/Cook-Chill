@@ -1,0 +1,35 @@
+{
+    "header": {
+        "title": "Entertainment Discover",
+        "navigation": [
+            { "label": "Search", "link": "#section1" },
+            { "label": "Discover", "link": "#section2" }
+        ]
+    },
+    "mainContent": {
+        "searchDiscoverBox": {
+            "heading": "Search, Discover, Decide",
+            "description": "Use our platform to find your next favorite movie or show.",
+            "image": {
+                "src": "netflix.jpeg",
+                "alt": "Search Discover Image",
+                "link": "chill2.html"
+            }
+        },
+        "infoSection": {
+            "text": "Let's talk entertainment.",
+            "image": {
+                "src": "chill1 pic 2.jpeg",
+                "alt": "Let's Talk Entertainment Image",
+                "link": "chill3.html"
+            }
+        }
+    },
+    "footer": {
+        "text": "Ready To Discover?",
+        "links": [
+            { "label": "Privacy Policy", "link": "#" },
+            { "label": "Terms of Service", "link": "#" }
+        ]
+    }
+}
