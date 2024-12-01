@@ -1,0 +1,211 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.main-content {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* Header Section */
+.header {
+    background-color: #307881; /* Fallback color */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    position: relative; /* To position the image absolutely */
+}
+
+.header img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5; /* Adjust the opacity for the background image */
+    z-index: -1; /* Place it behind the text and buttons */
+}
+
+.site-title {
+    font-size: 2em;
+}
+
+.header-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.header-button {
+    text-decoration: none;
+    background-color: #26c6da;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.header-button:hover {
+    background-color: #04525c;
+}
+
+/* Search & Discover Box */
+.search-discover-box {
+    display: flex;
+    justify-content: space-between;
+    background-color: #b2ebf2; /* Light blue background */
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 40px; /* Space below the section */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    height: 300px; /* Set a consistent height */
+}
+
+.content-part {
+    flex: 1;
+    padding: 20px;
+}
+
+.image-part {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-image {
+    max-width: 100%;
+    border-radius: 20px;
+    height: 100%; /* Ensure image fills the height */
+}
+
+/* Section 2: Let's Talk Entertainment */
+
+
+.info-box {
+    display: flex;
+    justify-content: space-between;
+    background-color: #41c3d4; /* Light blue background */
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 40px; /* Space below the section */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    height: 300px; /* Set a consistent height */
+   
+}
+.content-part {
+    flex: 1;
+    padding: 20px;
+    text: size 20%;;
+}
+.image-part {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.info-image {
+    max-width: 100%;
+    border-radius: 20px;
+    height: 100%; /* Ensure image fills the height */
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color:#307881;
+    color: white;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+
+.footer p {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1.2em;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-nav {
+        margin-top: 10px;
+    }
+
+    .search-discover-box,
+    .info-box {
+        height: auto; /* Allow flexible height on smaller screens */
+        flex-direction: column;
+    }
+
+    .content-part,
+    .image-part {
+        width: 100%;
+    }
+
+    .info-box {
+        padding: 25px;
+    }
+
+    .info-text {
+        font-size: 1.5em;
+    }
+
+    .footer p {
+        font-size: 1.2em;
+    }
+
+    .footer-links a {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-box {
+        padding: 20px;
+    }
+
+    .info-text {
+        font-size: 1.2em;
+    }
+
+    .footer p {
+        font-size: 1.1em;
+    }
+
+    .footer-links a {
+        font-size: 0.9em;
+    }
+}

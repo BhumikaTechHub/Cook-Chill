@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color:rgb(237, 233, 248);
+    color: #333;
+}
+
+/* Header and Navigation */
+.header {
+    background-color:rgb(101, 63, 203);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    border-radius: 23px;
+}
+
+.nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav ul li {
+    display: inline;
+}
+
+.nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content Area */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Search Bar and Filters */
+.search-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.search-input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid rgb(198, 184, 236);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.filter-buttons {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Create 5 equal columns */
+    gap: 10px; /* Add some spacing between the buttons */
+    justify-content: center;
+}
+
+.filter-buttons button {
+    background-color: rgb(237, 233, 248);
+    color: rgb(16, 15, 15);
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.filter-buttons button:hover {
+    background-color: rgb(106, 55, 245);
+    color: white;
+}
+
+.movie-section {
+    background-color: rgb(207, 194, 241); /* Light purple background */
+    padding: 20px;
+    border-radius: 20px; /* Rounded corners */
+    margin-bottom: 40px; /* Spacing between sections */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a soft shadow for depth */
+}
+
+.movie-list {
+    display: flex;
+    gap: 100px;
+    justify-content: center; /* Center the content */
+    padding: 10px 0;
+}
+
+.movie-list img {
+    width: 200px;
+    height: 240px;
+    border-radius: 10px; /* Optional: rounded corners for images */
+    object-fit: cover;
+    transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.movie-list img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+
+/* Footer */
+.footer {
+    background-color:rgb(107, 90, 152);
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.footer p {
+    color: white;
+    font-size: 1.2em;
+}
+
+.social-icons {
+    margin-top: 15px;
+}
+
+.social-icons a img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    filter: invert(1); /* Makes the icons white on dark background */
+}

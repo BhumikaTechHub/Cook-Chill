@@ -1,0 +1,211 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #F8E1C5;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    border-radius: 23px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: #061127;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 18px;
+    margin-right: 15px;
+}
+
+.profile-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for responsiveness */
+    width: 100%;
+    padding: 20px; /* Added padding for better spacing */
+    box-sizing: border-box; /* Include padding in width calculations */
+}
+
+h1 {
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px; /* Reduced margin for better spacing */
+    width: 100%; /* Full width for responsiveness */
+}
+
+.upload-section {
+    width: 100%; /* Full width on small screens */
+    max-width: 300px; /* Limit width on larger screens */
+    height: auto; /* Adjust height for content */
+    margin: 0 15px; /* Added margin for spacing */
+    background-color: #B4A392;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Added padding */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.upload-icon img.small-upload-icon {
+    width: 40px; /* Very small upload icon */
+    height: auto;
+}
+
+.upload-text {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Recipe Details Section Styling */
+.recipe-details {
+    width: 100%; /* Full width on small screens */
+    max-width: 400px; /* Limit width on larger screens */
+    padding: 20px; /* Added padding */
+    box-sizing: border-box;
+    border: 2px solid black;
+    background-color: #fff; /* Background color for better contrast */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.details-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+hr {
+    width: 100%;
+    border: 2px solid black;
+    margin: 10px 0;
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    font-weight: 800;
+}
+
+#category {
+    background-color: #ffa50000;
+    padding: 8px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+textarea {
+    resize: none;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Additional Section for Tags, Language, and Copyright */
+.tags-input {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.add-tag {
+    padding: 10px 20px;
+    border: 1px solid black;
+    background-color: #F3D8B2;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.plus-sign {
+    font-size: 24px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+/* Current Recipes Section */
+.current-recipes-section {
+    width: 100%; /* Full width on small screens */
+    padding: 30px; /* Added padding */
+    box-sizing: border-box;
+}
+
+.recipes-title {
+    font-size: 30px; /* Reduced font size for better responsiveness */
+    font-weight: 800;
+    margin-bottom: 30px; /* Reduced margin */
+    text-align: center; /* Center the title */
+}
+
+.recipe-card {
+    display: flex;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 20px; /* Adjust margin for spacing */
+    padding: 20px; /* Added padding */
+    flex-direction: column; /* Change to column layout */
+    align-items: center; /* Center align items */
+    width: 100%; /* Full width on small screens */
+    max-width: 300px; /* Limit width on larger screens */
+}
+
+.recipe-image img {
+    width: 100%; /* Responsive image */
+    border-radius: 10px;
+}
+
+.recipe-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align actions */
+    padding: 10px;
+}
+
+.recipe-actions p {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Footer section */
+.footer-container {
+    display: flex;
+    flex-direction: column; /* Column layout for footer */
+    align-items: center; /* Center align items */
+    margin-top: 50px;}
+     /* Adjust

@@ -1,0 +1,190 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+}
+
+/* Container layout */
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 20%;
+    background: linear-gradient(to bottom, #FFB08D, #88DAC1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    height: 100vh; /* Sidebar takes the full height of the viewport */
+    position: fixed; /* Fixed to always be visible */
+}
+
+.logo-section {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.profile-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+nav ul {
+    list-style: none;
+    margin-top: 40px;
+    width: 100%;
+}
+
+nav ul li {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a .icon {
+    width: 24px;
+    margin-right: 10px;
+}
+
+/* Top bar styling */
+.top-bar {
+    text-align: right;
+    padding: 20px;
+    margin-left: 20%;
+}
+
+.top-bar .home a {
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.top-bar .home a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Main content */
+.content {
+    margin-left: 20%; /* Adjust the content to not overlap with the sidebar */
+    padding: 40px;
+    width: 80%;
+    background: #fff; /* Change to a plain white background for simplicity */
+    border: none; /* Remove the black border for a cleaner look */
+    border-radius: 0px; /* Remove rounded corners for a more standard layout */
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-align: center; /* Center the title */
+}
+
+/* Favorites section */
+.favorites {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.favorite-item {
+    text-align: center;
+    border: 2px solid #ccc;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #f9f9f9;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.favorite-item img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.favorite-item h3 {
+    font-size: 20px;
+    color: #333;
+}
+
+.favorite-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Heart Icon Styling */
+.remove-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: #ff4444;
+    display: block; /* Ensure it is visible */
+    margin: 10px auto; /* Center the heart icon */
+}
+
+/* Clear All Favorites Button */
+.clear-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #ff4444;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.clear-btn:hover {
+    background-color: #e33d3d;
+}
+
+
+
+
+
+
+
+
+
+
+
