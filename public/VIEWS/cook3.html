@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Upload</title>
+    <link rel="stylesheet" href="/CSS/cook3.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="/IMAGES/logo.png" alt="Logo">
+        </div>
+        <nav>
+            <a href="/Cook&Chill/homepage.html">HOME</a>
+            <div class="profile-icon">
+                <a href = '/Cook&Chill/personal.html'>
+                <span>&#128100;</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <h1>SHARE YOUR CULINARY CREATIONS</h1>
+    <div class="container">
+
+        <div class="upload-section">
+            <div class="upload-icon">
+                <img src="/IMAGES/upload-icon.png" alt="Upload Icon"> <!-- Replace with the actual icon path -->
+            </div>
+            <p class="upload-text">UPLOAD YOUR RECIPE</p>
+        </div>
+
+        <div class="recipe-details">
+            <h2 class="details-title">RECIPE DETAILS</h2>
+            <hr>
+            <label for="title">TITLE</label>
+            <input type="text" id="title" value="UNTITLED RECIPE" style="background-color: #ffa50000; padding: 8px; font-weight: 800;">
+
+            <label for="description">DESCRIPTION</label>
+            <textarea id="description" rows="5" style="background-color: #ffa50000;"></textarea>
+            <hr>
+            <label for="ingredients">MAIN INGREDIENTS</label>
+            <textarea id="ingredients" rows="4" style="background-color: #ffa50000;"></textarea>
+            <hr>
+            <label for="category">CATEGORY</label>
+            <select id="category" style="font-weight: 800;">
+                <option>Select a Category</option>
+                <option>Breakfast</option>
+                <option>Lunch</option>
+                <option>Dinner</option>
+                <option>Dessert</option>
+            </select>
+        </div>
+
+        <div class="additional-details">
+            <label for="tags">TAGS</label>
+            <div class="tags-input">
+                <input type="text" id="tags" placeholder="Add tags">
+                <button class="add-tag">ADD TAG</button>
+                <span class="plus-sign">+</span>
+            </div>
+        </div>
+
+        <div class="current-recipes-section">
+            <h2 class="recipes-title">YOUR CURRENT RECIPES</h2>
+
+            <div class="recipe-card">
+                <div class="recipe-image">
+                    <img src="path/to/recipe-image.jpg" alt="Recipe Image">
+                </div>
+                <div class="recipe-actions">
+                    <p>Edit <span class="icon">&#9998;</span></p>
+                    <p>Delete <span class="icon">&#10006;</span></p>
+                </div>
+            </div>
+            <!-- Repeat .recipe-card for other recipes -->
+        </div>
+
+        <footer class="footer-container">
+            <div class="footer-left">
+                <div class="discover">DISCOVER GREAT RECIPES</div>
+                <div class="email">EMAIL US AT: contact@recipe.com</div>
+            </div>
+            <div class="footer-right">
+                <div class="policies">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="svgs">
+                    <svg> <!-- SVG code for social media icons --> </svg>
+                    <svg> <!-- SVG code for social media icons --> </svg>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <script src="/JS/cook3.js"></script>
+</body>
+
+</html>

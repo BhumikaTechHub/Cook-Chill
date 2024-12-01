@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entertainment Discover</title>
+    <link rel="stylesheet" href="/CSS/chill1.css">
+</head>
+
+<body>
+    <!-- Header with Navigation Buttons and Image -->
+    <header class="header" > 
+        <h1 class="site-title">Entertainment Discover</h1>
+        <nav class="header-nav">
+            <a href="#section1" class="header-button">Search</a>
+            <a href="#section2" class="header-button">Discover</a>
+        </nav>
+    </header>
+
+{{> header}}
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="search-discover-box">
+            <!-- Content Part -->
+            <div class="content-part">
+                <h2>Search, Discover, Decide</h2>
+                <p>Use our platform to find your next favorite movie or show.</p>
+            </div>
+            <div class="image-part">
+                <a href='/chill2.html'>
+                    <img src="/IMAGES/netflix.jpeg" alt="Search Discover Image" class="info-image" style=" max-width: 63%;
+    border-radius: 20px;
+    height: 38%;">
+                </a>
+            </div>
+        </section>
+
+        <!-- Section 2: Let's Talk Entertainment -->
+        <section class="info-section" id="section2">
+            <div class="info-box">
+                <div class="image-placeholder">
+                    <a href="/chill3.html">
+                        <img src="/IMAGES/chill1 pic 2.jpeg" alt="Let's Talk Entertainment Image" class="info-image">
+                    </a>
+                </div>
+                <p class="info-text">Let's talk entertainment.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Ready To Discover?</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </footer>
+    </main>
+    {{> footer}}
+    <script src="/JS/chill1.js"></script>
+
+</body>
+</html>
