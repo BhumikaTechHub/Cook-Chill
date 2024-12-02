@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/CSS/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>LOGIN</h2>
+            <form id="loginForm">
+                <label for="username">USERNAME</label>
+                <input type="text" id="username" placeholder="Enter username" required autocomplete="username">
+
+                <label for="password">PASSWORD</label>
+                <!-- Password container with toggle button -->
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Enter password" required autocomplete="current-password">
+                    <button type="button" id="togglePassword" class="toggle-btn">👁️</button>
+                </div>
+
+                <p>OR LOGIN WITH</p>
+                <!-- Google login button with id for JavaScript -->
+                <button type="button" id="googleLogin" class="google-btn">
+                    <img src="/IMAGES/google-logo.png" alt="Google logo">
+                    LOGIN WITH GOOGLE
+                </button>
+
+                <!-- Login button with id for JavaScript -->
+                <button type="submit" id="loginButton" class="submit-btn">LOGIN</button>
+
+                <p class="signup-link">DON'T HAVE AN ACCOUNT? <a href="/sign-up">SIGN UP</a></p>
+            </form>
+        </div>
+        <div class="image-container">
+            <img src="/IMAGES/blue food.jpg" alt="Menu image" id="backgroundImage">
+        </div>
+    </div>
+    <script src="/JS/login.js"></script>
+</body>
+</html>
