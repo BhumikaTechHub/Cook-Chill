@@ -8,7 +8,7 @@
     },
     "sections": [
         {
-            "link": "cook2.html",
+            "link": "/cook/2",
             "text": "FIND YOUR NEXT CULINARY ADVENTURE",
             "image": "searchyourfood.jpeg",
             "alt": "Search Discover Image",
@@ -17,7 +17,7 @@
             "fontsize":"50px"
         },
         {
-            "link": "cook3.html",
+            "link": "/cook/3",
             "text": "SHARE YOUR CULINARY CREATIONS",
             "image": "upload.jpeg",
             "alt": "Upload Image",
@@ -26,7 +26,7 @@
             "fontsize":"50px"
         },
         {
-            "link": "cook4.html",
+            "link": "/cook/4",
             "text": "SHARE YOUR FOODIE THOUGHTS",
             "image": "critic.jpeg",
             "alt": "Critic Image",
