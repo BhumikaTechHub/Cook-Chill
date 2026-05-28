@@ -1,149 +1,138 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Movie class representing individual movie objects
-    class Movie {
-        constructor(title, genre, year, language, type, src) {
-            this.title = title;
-            this.genre = genre;
-            this.year = year;
-            this.language = language;
-            this.type = type;
-            this.src = src;
-        }
+document.addEventListener('DOMContentLoaded', async () => {
+    const searchInput = document.querySelector('.search-input');
+    const filterButtons = document.querySelectorAll('.filter-buttons button');
+    const movieSort = document.getElementById('movieSort');
+    const clearFiltersButton = document.getElementById('clearMovieFilters');
+    const movieResultsCount = document.getElementById('movieResultsCount');
+    const pageStatus = document.getElementById('moviePageStatus');
+    const movieImages = [...document.querySelectorAll('.movie-list img')];
+    const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+
+    if (!searchInput || movieImages.length === 0) {
+        return;
     }
 
+    const movies = [
+        { title: 'Dhamaal', image: '/IMAGES/dhamaal.jpeg', tags: ['comedy', '2007', 'hindi', 'movie'] },
+        { title: 'Little Man', image: '/IMAGES/little man.jpeg', tags: ['comedy', '2006', 'english', 'movie'] },
+        { title: 'Panchayat', image: '/IMAGES/panchayat.jpeg', tags: ['comedy', '2020', 'hindi', 'tv show'] },
+        { title: 'Andhadhun', image: '/IMAGES/andhadun.jpg', tags: ['action', '2018', 'hindi', 'movie'] },
+        { title: 'Mirzapur', image: '/IMAGES/mirzapur.jpeg', tags: ['action', '2018', 'hindi', 'web series'] },
+        { title: 'Behind Her Eyes', image: '/IMAGES/behind her eyes.jpeg', tags: ['thriller', '2021', 'english', 'tv show'] },
+        { title: 'Puaada', image: '/IMAGES/puaada.jpeg', tags: ['romance', '2021', 'punjabi', 'movie'] },
+        { title: 'Kill', image: '/IMAGES/kill.jpg', tags: ['action', '2023', 'english', 'movie'] },
+        { title: 'Radhe', image: '/IMAGES/radhe.jpeg', tags: ['action', '2021', 'hindi', 'movie'] },
+        { title: '3 Idiots', image: '/IMAGES/3 idiots.jpeg', tags: ['comedy', '2009', 'hindi', 'movie'] },
+        { title: 'Bahubali 2', image: '/IMAGES/bahubali 2.jpeg', tags: ['action', '2017', 'telugu', 'movie'] },
+        { title: 'Carry On Jatta 2', image: '/IMAGES/carry on jatta 2.jpeg', tags: ['comedy', '2018', 'punjabi', 'movie'] },
+    ];
 
-    // Subclass for FeaturedMovie (Inheritance)
-    class FeaturedMovie extends Movie {
-        constructor(title, genre, year, language, type, src, isTopRated) {
-            super(title, genre, year, language, type, src); // Reusing the Movie class constructor
-            this.isTopRated = isTopRated; // Additional property specific to FeaturedMovie
-        }
+    const emptyState = document.createElement('div');
+    emptyState.className = 'empty-state';
+    emptyState.hidden = true;
+    emptyState.innerHTML = `
+        <div>
+            <h3>No titles matched</h3>
+            <p>Try another keyword or reset the active filters.</p>
+        </div>
+    `;
+    movieImages[movieImages.length - 1].closest('.movie-section')?.after(emptyState);
 
-        // Method to display additional details for FeaturedMovie
-        displayFeature() {
-            return `${this.title} is one of the top-rated movies in the ${this.genre} genre!`;
-        }
-    }
+    const applyFilter = () => {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
 
-    // MovieList class for managing the movie collection and operations
-    class MovieList {
-        constructor() {
-            this.movies = [];
-        }
+        movieImages.forEach((image, index) => {
+            const movie = movies[index];
+            const matches = !searchTerm
+                || movie.title.toLowerCase().includes(searchTerm)
+                || movie.tags.some((tag) => tag.includes(searchTerm));
 
-        addMovie(movie) {
-            this.movies.push(movie);
-        }
-        // Polymorphism: Overloaded methods for filtering movies
-        filterMovies(filterKey, filterValue) {
-            // General filtering method
-            return this.movies.filter(movie => movie[filterKey].toLowerCase() === filterValue.toLowerCase());
-        }
-
-        filterMovies(filterKey, minValue, maxValue) {
-            // Overloaded method for range-based filtering (e.g., years or ratings)
-            if (filterKey === 'year') {
-                return this.movies.filter(movie => movie.year >= minValue && movie.year <= maxValue);
+            image.style.display = matches ? '' : 'none';
+            if (matches) {
+                visibleCount += 1;
             }
-            return [];
-        }
+        });
 
-        searchMovies(searchTerm) {
-            return this.movies.filter(movie =>
-                movie.title.toLowerCase().includes(searchTerm)
-            );
-        }
+        movieResultsCount.textContent = `${visibleCount} pick${visibleCount === 1 ? '' : 's'}`;
+        emptyState.hidden = visibleCount !== 0;
+    };
 
-        filterMovies(filterTerm) {
-            return this.movies.filter(movie =>
-                movie.genre.toLowerCase() === filterTerm ||
-                movie.year === filterTerm ||
-                movie.language.toLowerCase() === filterTerm ||
-                movie.type.toLowerCase() === filterTerm
-            );
-        }
-    }
+    const applySort = () => {
+        const groups = [...document.querySelectorAll('.movie-list')];
+        const entries = groups.flatMap((group) => [...group.querySelectorAll('img')].map((image) => ({
+            image,
+            metadata: movies[movieImages.indexOf(image)],
+        })));
 
-    // UI class for handling DOM manipulations
-    class UI {
-        static displayMovies(movieContainer, movies) {
-            movieContainer.innerHTML = ''; // Clear previous movies
-
-            if (movies.length === 0) {
-                const noResult = document.createElement('p');
-                noResult.textContent = 'No movies found';
-                movieContainer.appendChild(noResult);
-                return;
-            }
-
-            movies.forEach(movie => {
-                const img = document.createElement('img');
-                img.src = `/images/${movie.src}`;
-                img.alt = movie.title;
-                img.classList.add('movie-item');
-                movieContainer.appendChild(img);
+        const mode = movieSort?.value || 'featured';
+        if (mode === 'az') {
+            entries.sort((left, right) => left.metadata.title.localeCompare(right.metadata.title));
+        } else if (mode === 'za') {
+            entries.sort((left, right) => right.metadata.title.localeCompare(left.metadata.title));
+        } else if (mode === 'newest') {
+            entries.sort((left, right) => {
+                const leftYear = Number(left.metadata.tags.find((tag) => /^\d{4}$/.test(tag)) || 0);
+                const rightYear = Number(right.metadata.tags.find((tag) => /^\d{4}$/.test(tag)) || 0);
+                return rightYear - leftYear;
             });
         }
-    }
-     // Initialize movie list and add movie data
-     const movieList = new MovieList();
-     const movieData = [
-         new Movie("Dhamaal", "Comedy", "2007", "Hindi", "Movie", "dhamaal.jpeg"),
-         new Movie("Little Man", "Comedy", "2006", "English", "Movie", "little man.jpeg"),
-         new Movie("Panchayat", "Comedy", "2020", "Hindi", "TV Show", "panchayat.jpeg"),
-         new Movie("Andhadhun", "Action", "2018", "Hindi", "Movie", "andhadun.jpg"),
-         new Movie("Mirzapur", "Action", "2018", "Hindi", "Web Series", "mirzapur.jpeg"),
-         new Movie("Behind Her Eyes", "Thriller", "2021", "English", "TV Show", "behind her eyes.jpeg"),
-         new Movie("Puaada", "Romance", "2021", "Punjabi", "Movie", "puaada.jpeg"),
-         new Movie("Kill", "Action", "2023", "English", "Movie", "kill.jpg"),
-         new Movie("Radhe", "Action", "2021", "Hindi", "Movie", "radhe.jpeg"),
-         new Movie("3 Idiots", "Comedy", "2009", "Hindi", "Movie", "3 idiots.jpeg"),
-         new Movie("Bahubali 2", "Action", "2017", "Telugu", "Movie", "bahubali 2.jpeg"),
-         new Movie("Carry On Jatta 2", "Comedy", "2018", "Punjabi", "Movie", "carry on jatta 2.jpeg")
-     ];
- 
-     movieData.forEach(movie => movieList.addMovie(movie));
- 
-     // Select DOM elements
-     const searchInput = document.querySelector('.search-input');
-     const movieListContainer = document.querySelector('.movieList');
-     const filterButtons = document.querySelectorAll('.filter-buttons button');
- 
-     // Initial display of all movies
-     UI.displayMovies(movieListContainer, movieList.movies);
- 
-     // Filtering featured movies (additional property isTopRated)
-     const featuredMovies = movieList.movies.filter(movie => movie instanceof FeaturedMovie && movie.isTopRated);
-     featuredMovies.forEach(movie => console.log(movie.displayFeature()));
- 
-     // Filtering movies by year range (Polymorphism)
-     const recentMovies = movieList.filterMovies('year', 2010, 2020);
-     UI.displayMovies(movieListContainer, recentMovies);
- 
-     // Search functionality
-     searchInput.addEventListener('input', function () {
-         const searchTerm = searchInput.value.toLowerCase();
-         const filteredMovies = movieList.searchMovies(searchTerm);
-         UI.displayMovies(movieListContainer, filteredMovies);
-     });
- 
-     // Filter functionality
-     filterButtons.forEach(button => {
-         button.addEventListener('click', function () {
-             const filterTerm = button.textContent.toLowerCase();
-             const filteredMovies = movieList.filterMovies(filterTerm);
-             UI.displayMovies(movieListContainer, filteredMovies);
-         });
-     });
- 
-     // Smooth scroll for navigation links
-     document.querySelectorAll('.nav a').forEach(link => {
-         link.addEventListener('click', function (e) {
-             e.preventDefault();
-             const targetSection = document.querySelector(link.getAttribute('href'));
-             if (targetSection) {
-                 targetSection.scrollIntoView({ behavior: 'smooth' });
-             }
-         });
-     });
- });
+
+        if (mode !== 'featured') {
+            const primaryGroup = groups[0];
+            entries.forEach(({ image }) => primaryGroup.appendChild(image));
+        }
+    };
+
+    const debouncedFilter = window.CookChill.debounce(applyFilter, 200);
+
+    searchInput.addEventListener('input', debouncedFilter);
+    movieSort?.addEventListener('change', () => {
+        applySort();
+        applyFilter();
+    });
+
+    filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            searchInput.value = button.textContent.trim();
+            applyFilter();
+        });
+    });
+
+    clearFiltersButton?.addEventListener('click', () => {
+        searchInput.value = '';
+        if (movieSort) {
+            movieSort.value = 'featured';
+        }
+        applySort();
+        applyFilter();
+    });
+
+    navLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            target?.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    await Promise.all(movieImages.map((image, index) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'media-card';
+        image.parentElement.insertBefore(wrapper, image);
+        wrapper.appendChild(image);
+
+        return window.CookChill.attachFavoriteButton(wrapper, {
+            targetType: 'ENTERTAINMENT',
+            targetTitle: movies[index].title,
+            targetImage: movies[index].image,
+        }, {
+            onError(message) {
+                window.CookChill.setStatus(pageStatus, message, 'error');
+            },
+        });
+    }));
+
+    applySort();
+    applyFilter();
+});

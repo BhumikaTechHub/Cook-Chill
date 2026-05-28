@@ -1,0 +1,67 @@
+<%- include('../partials/head', { title, stylesheet: '/CSS/cook4.css' }) %>
+
+<header class="main-header">
+    <div class="logo">
+        <img src="/IMAGES/logo.png" alt="Logo" class="logo-img">
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="reviews-section">
+    <div class="reviews">
+        <div class="review-item">
+            <span class="emoji">&#128588;</span>
+            <h4>JUST LOVE IT ALL</h4>
+            <p>As one user said!</p>
+        </div>
+        <div class="review-item">
+            <span class="emoji">&#129321;</span>
+            <h4>HELPFUL CUSTOMER SUPPORT</h4>
+            <p>Official feedback from a happy customer</p>
+        </div>
+        <div class="review-item">
+            <span class="emoji">&#128079;</span>
+            <h4>USER-FRIENDLY FEATURES</h4>
+            <p>Exploring the best skills</p>
+        </div>
+    </div>
+</section>
+
+<section class="feedback-chart">
+    <h2>Constructive Feedback</h2>
+    <div class="bar-container">
+        <div class="bar" data-stars="5">5 Stars</div>
+        <div class="bar" data-stars="4">4 Stars</div>
+        <div class="bar" data-stars="3">3 Stars</div>
+        <div class="bar" data-stars="2">2 Stars</div>
+        <div class="bar" data-stars="1">1 Star</div>
+    </div>
+</section>
+
+<section class="review-form">
+    <h2>Leave Us A Review</h2>
+    <form id="cookReviewForm">
+        <div class="stars">
+            <input type="radio" name="rating" id="star5" value="5"><label for="star5">&#9733;</label>
+            <input type="radio" name="rating" id="star4" value="4"><label for="star4">&#9733;</label>
+            <input type="radio" name="rating" id="star3" value="3"><label for="star3">&#9733;</label>
+            <input type="radio" name="rating" id="star2" value="2"><label for="star2">&#9733;</label>
+            <input type="radio" name="rating" id="star1" value="1"><label for="star1">&#9733;</label>
+        </div>
+        <label for="cookReviewComment" class="review-label">Share your thoughts</label>
+        <textarea id="cookReviewComment" placeholder="Tell us what made your Cook experience memorable."></textarea>
+        <button type="submit" class="action-button" id="cookReviewButton">Submit</button>
+        <p id="cookReviewStatus" class="status-message" hidden></p>
+    </form>
+</section>
+
+<%- include('../partials/app-footer') %>
+
+<script src="/JS/cook4.js"></script>
+<%- include('../partials/foot') %>

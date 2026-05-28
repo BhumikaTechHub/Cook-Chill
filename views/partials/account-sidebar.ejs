@@ -1,0 +1,26 @@
+<div class="sidebar">
+    <div class="logo-section">
+        <img src="/IMAGES/logo.png" alt="Website Logo" class="logo">
+    </div>
+    <div class="profile-section">
+        <img src="/IMAGES/person's profile.png" alt="Profile Picture" class="profile-pic">
+        <h2>MY ACCOUNT</h2>
+    </div>
+    <nav>
+        <ul>
+            <li class="<%= activePage === 'profile' ? 'active' : '' %>">
+                <a href="/profile"><img src="/IMAGES/personal-icon.png" alt="Personal Icon" class="icon"> Personal</a>
+            </li>
+            <li class="<%= activePage === 'saved' ? 'active' : '' %>">
+                <a href="/saved"><img src="/IMAGES/saved-icon.png" alt="Saved Icon" class="icon"> Saved</a>
+            </li>
+            <li>
+                <a href="/cook/upload"><img src="/IMAGES/upload-icon.png" alt="Upload Icon" class="icon"> Upload</a>
+            </li>
+            <li class="<%= activePage === 'review' ? 'active' : '' %>">
+                <a href="/review"><img src="/IMAGES/review-icon.png" alt="Review Icon" class="icon"> Review</a>
+            </li>
+        </ul>
+    </nav>
+    <button type="button" class="ghost-button logout-button" id="logoutButton">Log Out</button>
+</div>

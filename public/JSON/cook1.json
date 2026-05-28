@@ -1,38 +1,38 @@
 {
     "header": {
         "links": [
-            { "name": "Home", "href": "homepage.html" },
-            { "name": "About Us", "href": "AboutPage.html" },
-            { "name": "Contact", "href": "ContactUs.html" }
+            { "name": "Home", "href": "/" },
+            { "name": "About Us", "href": "/about" },
+            { "name": "Contact", "href": "/contact" }
         ]
     },
     "sections": [
         {
-            "link": "/cook/2",
+            "link": "/cook/discover",
             "text": "FIND YOUR NEXT CULINARY ADVENTURE",
-            "image": "searchyourfood.jpeg",
+            "image": "/IMAGES/searchyourfood.jpeg",
             "alt": "Search Discover Image",
             "bgColor": "#ecb879",
             "textColor": "#ffffff",
-            "fontsize":"50px"
+            "fontSize": "50px"
         },
         {
-            "link": "/cook/3",
+            "link": "/cook/upload",
             "text": "SHARE YOUR CULINARY CREATIONS",
-            "image": "upload.jpeg",
+            "image": "/IMAGES/upload.jpeg",
             "alt": "Upload Image",
             "bgColor": "#f4a23e",
             "textColor": "#ffffff",
-            "fontsize":"50px"
+            "fontSize": "50px"
         },
         {
-            "link": "/cook/4",
+            "link": "/cook/reviews",
             "text": "SHARE YOUR FOODIE THOUGHTS",
-            "image": "critic.jpeg",
+            "image": "/IMAGES/critic.jpeg",
             "alt": "Critic Image",
             "bgColor": "#e0871a",
             "textColor": "#ffffff",
-            "fontsize":"50px"
+            "fontSize": "50px"
         }
     ],
     "footer": {
@@ -41,19 +41,6 @@
         "policies": [
             { "name": "Privacy Policy", "href": "#" },
             { "name": "Terms & Conditions", "href": "#" }
-        ],
-        "socialIcons": [
-            { "icon": "facebook.svg", "link": "#" },
-            { "icon": "twitter.svg", "link": "#" },
-            { "icon": "instagram.svg", "link": "#" }
         ]
     }
 }
-
-
-
-
-
-
-
-

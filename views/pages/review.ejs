@@ -1,0 +1,25 @@
+<%- include('../partials/head', { title, stylesheet: '/CSS/review.css' }) %>
+
+<div class="container">
+    <%- include('../partials/account-sidebar', { activePage }) %>
+
+    <div class="content">
+        <div class="top-bar">
+            <div class="home">
+                <a href="/">Home</a>
+            </div>
+        </div>
+
+        <h1>REVIEW</h1>
+
+        <div class="review-column">
+            <h2>Film Reviews</h2>
+            <div class="box">
+                <img src="/IMAGES/Korean Poetry.jpg" alt="Film Review" class="review-pic">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/JS/review.js"></script>
+<%- include('../partials/foot') %>

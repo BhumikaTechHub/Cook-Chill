@@ -1,73 +1,139 @@
-// Real-time validation for email and phone number
-const emailInput = document.getElementById("email");
-const phoneInput = document.getElementById("phone");
-const fullNameInput = document.getElementById("fullname");
+document.addEventListener('DOMContentLoaded', async () => {
+    const profileForm = document.getElementById('profileForm');
+    const passwordForm = document.getElementById('passwordForm');
+    const fullNameInput = document.getElementById('fullname');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const dobInput = document.getElementById('dob');
+    const profileStatus = document.getElementById('profileStatus');
+    const passwordStatus = document.getElementById('passwordStatus');
+    const usernameBadge = document.getElementById('profileUsernameBadge');
+    const favoritesCount = document.getElementById('favoritesCount');
+    const recipesCount = document.getElementById('recipesCount');
+    const reviewsCount = document.getElementById('reviewsCount');
+    const profileRecipes = document.getElementById('profileRecipes');
+    const profileSaveButton = document.getElementById('profileSaveButton');
+    const passwordSaveButton = document.getElementById('passwordSaveButton');
 
-// Regex patterns for validation
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phonePattern = /^\d{10}$/;
-
-// Function to validate email
-emailInput.addEventListener("input", () => {
-    if (emailPattern.test(emailInput.value)) {
-        emailInput.style.borderColor = "#4CAF50"; // Green border for valid email
-    } else {
-        emailInput.style.borderColor = "#F44336"; // Red border for invalid email
+    if (!profileForm || !passwordForm || !fullNameInput || !emailInput || !phoneInput || !dobInput) {
+        return;
     }
-});
 
-// Function to validate phone number
-phoneInput.addEventListener("input", () => {
-    if (phonePattern.test(phoneInput.value)) {
-        phoneInput.style.borderColor = "#4CAF50"; // Green border for valid phone
-    } else {
-        phoneInput.style.borderColor = "#F44336"; // Red border for invalid phone
+    function formatDate(value) {
+        if (!value) {
+            return '';
+        }
+
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) {
+            return '';
+        }
+
+        return date.toISOString().slice(0, 10);
     }
-});
 
-// Dynamic welcome message
-const welcomeMessage = document.createElement("h2");
-const contentArea = document.querySelector(".content");
-fullNameInput.addEventListener("blur", () => {
-    const userName = fullNameInput.value.trim();
-    if (userName) {
-        welcomeMessage.textContent = `Welcome, ${userName}! Let's get started with your account.`;
-        welcomeMessage.style.color = "#4CAF50";
-        contentArea.insertBefore(welcomeMessage, contentArea.children[2]);
+    function renderManagedRecipes(recipes) {
+        if (!profileRecipes) {
+            return;
+        }
+
+        if (!recipes || recipes.length === 0) {
+            profileRecipes.innerHTML = `
+                <div class="empty-state">
+                    <div>
+                        <h3>No recipes uploaded yet</h3>
+                        <p>Your recipe studio is ready when you are.</p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        profileRecipes.innerHTML = recipes.map((recipe) => `
+            <article class="managed-card">
+                <div>
+                    <h3>${recipe.title}</h3>
+                    <p>${recipe.category}</p>
+                    <p>${recipe.tags.join(', ')}</p>
+                </div>
+                <a class="secondary-button" href="/cook/upload">Manage</a>
+            </article>
+        `).join('');
     }
-});
 
-// Highlight the active navigation section
-const navLinks = document.querySelectorAll(".sidebar nav ul li a");
+    try {
+        const data = await window.CookChill.fetchJson('/api/profile');
+        const profile = data.profile;
 
-navLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-        navLinks.forEach((link) => link.parentElement.classList.remove("active"));
-        event.target.parentElement.classList.add("active");
+        usernameBadge.textContent = profile.USERNAME || 'Member';
+        fullNameInput.value = profile.FULLNAME || '';
+        emailInput.value = profile.EMAIL || '';
+        phoneInput.value = profile.PHONE || '';
+        dobInput.value = formatDate(profile.DATE_OF_BIRTH);
+
+        favoritesCount.textContent = String((profile.favorites || []).length);
+        recipesCount.textContent = String((profile.recipes || []).length);
+        reviewsCount.textContent = String((profile.reviews || []).length);
+
+        renderManagedRecipes(profile.recipes || []);
+    } catch (error) {
+        console.error('Profile load error:', error);
+        window.CookChill.setStatus(profileStatus, window.CookChill.normalizeErrorMessage(error, 'Unable to load profile data.'), 'error');
+    }
+
+    profileForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        profileSaveButton.disabled = true;
+        profileSaveButton.innerHTML = window.CookChill.createSpinnerLabel('Saving...');
+
+        try {
+            const data = await window.CookChill.fetchJson('/api/profile', {
+                method: 'PUT',
+                body: JSON.stringify({
+                    FULLNAME: fullNameInput.value.trim(),
+                    PHONE: phoneInput.value.trim(),
+                    DATE_OF_BIRTH: dobInput.value,
+                }),
+            });
+
+            emailInput.value = data.profile.EMAIL || emailInput.value;
+            window.CookChill.setStatus(profileStatus, data.message || 'Profile updated successfully.', 'success');
+        } catch (error) {
+            console.error('Profile update error:', error);
+            window.CookChill.setStatus(profileStatus, window.CookChill.normalizeErrorMessage(error, 'Unable to update profile.'), 'error');
+        } finally {
+            profileSaveButton.disabled = false;
+            profileSaveButton.textContent = 'Save Profile';
+        }
     });
-});
 
-// Tooltip for input fields
-const inputFields = document.querySelectorAll(".input-field");
-inputFields.forEach((input) => {
-    input.addEventListener("focus", (event) => {
-        const tooltip = document.createElement("span");
-        tooltip.classList.add("tooltip");
-        tooltip.textContent = `Please enter your ${event.target.placeholder.toLowerCase()}`;
-        tooltip.style.position = "absolute";
-        tooltip.style.backgroundColor = "#333";
-        tooltip.style.color = "#fff";
-        tooltip.style.padding = "5px 10px";
-        tooltip.style.borderRadius = "5px";
-        tooltip.style.top = `${event.target.getBoundingClientRect().top - 30}px`;
-        tooltip.style.left = `${event.target.getBoundingClientRect().left}px`;
-        tooltip.style.fontSize = "12px";
-        tooltip.style.zIndex = "1000";
-        tooltip.style.opacity = "0.8";
-        document.body.appendChild(tooltip);
+    passwordForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-        input.addEventListener("blur", () => {
-            tooltip.remove();
-        });
+        const currentPassword = document.getElementById('currentPassword');
+        const newPassword = document.getElementById('newPassword');
+
+        passwordSaveButton.disabled = true;
+        passwordSaveButton.innerHTML = window.CookChill.createSpinnerLabel('Updating...');
+
+        try {
+            const data = await window.CookChill.fetchJson('/api/profile/password', {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    CURRENT_PASSWORD: currentPassword.value,
+                    NEW_PASSWORD: newPassword.value,
+                }),
+            });
+
+            passwordForm.reset();
+            window.CookChill.setStatus(passwordStatus, data.message || 'Password updated successfully.', 'success');
+        } catch (error) {
+            console.error('Password update error:', error);
+            window.CookChill.setStatus(passwordStatus, window.CookChill.normalizeErrorMessage(error, 'Unable to update password.'), 'error');
+        } finally {
+            passwordSaveButton.disabled = false;
+            passwordSaveButton.textContent = 'Update Password';
+        }
     });
 });

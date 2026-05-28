@@ -1,46 +1,77 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // 1. Add interactivity to feedback chart (highlight bars on hover)
+document.addEventListener('DOMContentLoaded', () => {
     const bars = document.querySelectorAll('.bar');
-    bars.forEach(bar => {
-        bar.addEventListener('mouseover', function () {
-            bar.style.backgroundColor = '#FFAA00'; // Change color on hover
-        });
-        bar.addEventListener('mouseout', function () {
-            bar.style.backgroundColor = ''; // Reset color after hover
-        });
-    });
-
-    // 2. Add interactivity to star rating system
     const stars = document.querySelectorAll('.stars input');
-    stars.forEach(star => {
-        star.addEventListener('change', function () {
-            const rating = document.querySelector('input[name="rating"]:checked').value;
-            alert(`You selected ${rating} stars!`); // Show the selected rating
+    const form = document.getElementById('cookReviewForm');
+    const status = document.getElementById('cookReviewStatus');
+    const submitButton = document.getElementById('cookReviewButton');
+    let selectedRating = 0;
+
+    bars.forEach((bar) => {
+        bar.addEventListener('mouseover', () => {
+            bar.style.backgroundColor = '#FFAA00';
+        });
+        bar.addEventListener('mouseout', () => {
+            bar.style.backgroundColor = '';
         });
     });
 
-    // 3. Handle form submission with validation and alert
-    const form = document.querySelector('.review-form form');
-    if (form) {
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent default form submission
-            const comment = form.querySelector('textarea').value.trim();
-            const selectedRating = form.querySelector('input[name="rating"]:checked');
-
-            if (!selectedRating || comment === '') {
-                alert('Please select a rating and provide a comment.');
-            } else {
-                alert('Thank you for your feedback!');
-                form.reset(); // Reset the form
-            }
+    stars.forEach((star) => {
+        star.addEventListener('change', () => {
+            selectedRating = Number(star.value);
         });
-    }
+    });
 
-    // 4. Make footer social media icons clickable with interaction
-    const svgs = document.querySelectorAll('.svgs svg');
-    svgs.forEach(svg => {
-        svg.addEventListener('click', function () {
-            alert('Thank you for connecting with us!'); // Simple interaction on click
+    form?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const comment = form.querySelector('textarea').value.trim();
+
+        if (!selectedRating || !comment) {
+            window.CookChill.setStatus(status, 'Please select a rating and provide a comment.', 'error');
+            return;
+        }
+
+        try {
+            submitButton.disabled = true;
+            submitButton.innerHTML = window.CookChill.createSpinnerLabel('Submitting...');
+            await window.CookChill.requireAuthenticatedUser();
+            await window.CookChill.fetchJson('/api/reviews', {
+                method: 'POST',
+                body: JSON.stringify({
+                    targetType: 'GENERAL',
+                    targetTitle: 'Cook Community Feedback',
+                    comment,
+                }),
+            });
+
+            await window.CookChill.fetchJson('/api/ratings', {
+                method: 'POST',
+                body: JSON.stringify({
+                    targetType: 'RECIPE',
+                    targetTitle: 'Cook Community Feedback',
+                    value: selectedRating,
+                }),
+            });
+
+            window.CookChill.setStatus(status, 'Thank you for your feedback!', 'success');
+            form.reset();
+            selectedRating = 0;
+        } catch (error) {
+            if (error.status === 401) {
+                window.CookChill.redirectToLogin('/cook/reviews');
+                return;
+            }
+
+            console.error('Cook review error:', error);
+            window.CookChill.setStatus(status, window.CookChill.normalizeErrorMessage(error, 'Unable to submit feedback right now.'), 'error');
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit';
+        }
+    });
+
+    document.querySelectorAll('.svgs svg').forEach((svg) => {
+        svg.addEventListener('click', () => {
+            window.CookChill.setStatus(status, 'Thanks for exploring Cook and Chill with us.', 'info');
         });
     });
 });

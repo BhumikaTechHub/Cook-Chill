@@ -1,0 +1,123 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  Breakfast
+  Lunch
+  Dinner
+  Dessert
+}
+
+enum ReviewTargetType {
+  RECIPE
+  ENTERTAINMENT
+  GENERAL
+}
+
+enum FavoriteTargetType {
+  RECIPE
+  ENTERTAINMENT
+}
+
+enum RatingTargetType {
+  RECIPE
+  ENTERTAINMENT
+}
+
+model User {
+  id           String     @id @default(cuid())
+  username     String     @unique
+  email        String     @unique
+  passwordHash String
+  fullName     String?
+  phone        String?
+  dateOfBirth  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  recipes      Recipe[]
+  favorites    Favorite[]
+  reviews      Review[]
+  ratings      Rating[]
+
+  @@map("users")
+}
+
+model Recipe {
+  id          String     @id @default(cuid())
+  title       String
+  description String
+  ingredients String
+  category    Category
+  tags        String[]   @default([])
+  authorId    String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  author      User?      @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  favorites   Favorite[]
+  ratings     Rating[]
+  reviews     Review[]
+
+  @@index([authorId])
+  @@map("recipes")
+}
+
+model Review {
+  id          String           @id @default(cuid())
+  userId      String
+  recipeId    String?
+  targetType  ReviewTargetType @default(RECIPE)
+  targetTitle String?
+  comment     String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  recipe      Recipe?          @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ratings     Rating[]
+
+  @@index([userId])
+  @@index([recipeId])
+  @@map("reviews")
+}
+
+model Favorite {
+  id          String             @id @default(cuid())
+  userId      String
+  recipeId    String?
+  targetType  FavoriteTargetType @default(RECIPE)
+  targetTitle String
+  targetImage String?
+  createdAt   DateTime           @default(now())
+  recipe      Recipe?            @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, recipeId, targetTitle])
+  @@index([userId])
+  @@index([recipeId])
+  @@map("favorites")
+}
+
+model Rating {
+  id          String           @id @default(cuid())
+  userId      String
+  recipeId    String?
+  reviewId    String?
+  targetType  RatingTargetType @default(RECIPE)
+  targetTitle String?
+  value       Int
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  recipe      Recipe?          @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  review      Review?          @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([recipeId])
+  @@index([reviewId])
+  @@map("ratings")
+}

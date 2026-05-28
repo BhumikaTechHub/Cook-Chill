@@ -1,0 +1,38 @@
+<%- include('../partials/head', { title, stylesheet: '/CSS/saved.css' }) %>
+
+<div class="container">
+    <%- include('../partials/account-sidebar', { activePage }) %>
+
+    <div class="content">
+        <div class="top-bar">
+            <div class="home">
+                <a href="/">Home</a>
+            </div>
+        </div>
+
+        <div class="favorites-header">
+            <div>
+                <h1>MY FAVORITES</h1>
+                <p class="favorites-copy">Your saved recipes and entertainment picks now sync to your account.</p>
+            </div>
+            <div class="favorites-actions">
+                <button type="button" id="refreshFavoritesButton" class="secondary-button">Refresh</button>
+                <a href="/cook/discover" class="ghost-button">Find More Recipes</a>
+                <a href="/chill/discover" class="ghost-button">Browse Chill Picks</a>
+            </div>
+        </div>
+
+        <p id="favoritesStatus" class="status-message" hidden></p>
+        <div id="favoritesLoading" class="loading-state"></div>
+        <div id="favoritesEmpty" class="empty-state" hidden>
+            <div>
+                <h2>No favorites yet</h2>
+                <p>Save recipe cards and movie picks to build your personal collection.</p>
+            </div>
+        </div>
+        <div class="favorites" id="favoritesGrid" hidden></div>
+    </div>
+</div>
+
+<script src="/JS/saved.js"></script>
+<%- include('../partials/foot') %>

@@ -1,0 +1,68 @@
+<%- include('../partials/head', { title, stylesheet: '/CSS/chill3.css' }) %>
+
+<header class="header-section">
+    <nav class="navbar">
+        <div class="logo img">
+            <img src="/IMAGES/logo.png" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#chart">Feedback Chart</a></li>
+            <li><a href="#form">Leave a Review</a></li>
+            <li class="profile-icon">
+                <a href="/profile"><span>&#128100;</span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="reviews" id="reviews">
+        <div class="review-item">
+            <span class="emoji">&#128588;</span>
+            <h4>JUST LOVE IT ALL</h4>
+            <p>As one user said!</p>
+        </div>
+        <div class="review-item">
+            <span class="emoji">&#129321;</span>
+            <h4>HELPFUL CUSTOMER SUPPORT</h4>
+            <p>Official feedback from a happy customer</p>
+        </div>
+        <div class="review-item">
+            <span class="emoji">&#128079;</span>
+            <h4>USER-FRIENDLY FEATURES</h4>
+            <p>Exploring the best skills</p>
+        </div>
+    </div>
+</header>
+
+<section class="feedback-chart" id="chart">
+    <h2>Constructive Feedback</h2>
+    <div class="bar-container">
+        <div class="bar" data-stars="5">5 Stars</div>
+        <div class="bar" data-stars="4">4 Stars</div>
+        <div class="bar" data-stars="3">3 Stars</div>
+        <div class="bar" data-stars="2">2 Stars</div>
+        <div class="bar" data-stars="1">1 Star</div>
+    </div>
+</section>
+
+<section class="review-form" id="form">
+    <h2>Leave Us A Review</h2>
+    <form id="chillReviewForm">
+        <div class="stars">
+            <input type="radio" name="rating" id="star5" value="5"><label for="star5">&#9733;</label>
+            <input type="radio" name="rating" id="star4" value="4"><label for="star4">&#9733;</label>
+            <input type="radio" name="rating" id="star3" value="3"><label for="star3">&#9733;</label>
+            <input type="radio" name="rating" id="star2" value="2"><label for="star2">&#9733;</label>
+            <input type="radio" name="rating" id="star1" value="1"><label for="star1">&#9733;</label>
+        </div>
+        <label for="chillReviewComment" class="review-label">Share your thoughts</label>
+        <textarea id="chillReviewComment" placeholder="Tell us about the movie and chill experience you had here."></textarea>
+        <button type="submit" class="action-button" id="chillReviewButton">Submit</button>
+        <p id="chillReviewStatus" class="status-message" hidden></p>
+    </form>
+</section>
+
+<%- include('../partials/app-footer') %>
+
+<script src="/JS/chill3.js"></script>
+<%- include('../partials/foot') %>

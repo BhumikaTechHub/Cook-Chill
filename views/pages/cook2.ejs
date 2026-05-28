@@ -1,0 +1,178 @@
+<%- include('../partials/head', { title, stylesheet: '/CSS/cook2.css' }) %>
+
+<header>
+    <div class="logo">
+        <img src="/IMAGES/logo.png" alt="Logo">
+    </div>
+    <nav>
+        <a href="/">HOME</a>
+        <div class="profile-icon">
+            <a href="/profile">
+                <span>&#128100;</span>
+            </a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="search-bar">
+        <input type="text" placeholder="Search recipes, ingredients, or tags" class="search-input">
+        <button type="button" class="search-btn">&#128269;</button>
+    </div>
+    <div class="tag-container">
+        <div class="tag">Vegan</div>
+        <div class="tag">Dairy-free</div>
+        <div class="tag">Beginner</div>
+        <div class="tag">Middle</div>
+        <div class="tag">Advanced</div>
+        <div class="tag">Breakfast</div>
+        <div class="tag">Lunch</div>
+        <div class="tag">Dinner</div>
+        <div class="tag">Snack</div>
+        <div class="tag">Dessert</div>
+        <div class="tag">Quick</div>
+        <div class="tag">Moderate</div>
+        <div class="tag">Time-consuming</div>
+        <div class="tag">Spicy</div>
+        <div class="tag">Creamy</div>
+    </div>
+</main>
+
+<div class="toolbar">
+    <div class="toolbar-group">
+        <label for="recipeSort">Sort recipes</label>
+        <select id="recipeSort">
+            <option value="featured">Featured</option>
+            <option value="az">A to Z</option>
+            <option value="za">Z to A</option>
+        </select>
+        <button type="button" id="clearRecipeFilters" class="ghost-button">Clear Filters</button>
+    </div>
+    <div class="toolbar-group">
+        <span id="recipeResultsCount">12 recipes</span>
+    </div>
+</div>
+
+<p id="recipePageStatus" class="status-message" hidden></p>
+
+<div class="headingContainer">
+    <h1>TOP 10 RECIPES</h1>
+    <div class="rightArrow">
+        <img src="https://cdn1.iconfinder.com/data/icons/arrows-14/24/Arrow-Right_in_Circle-64.png" alt="Arrow Icon">
+    </div>
+</div>
+
+<div class="recipes-container">
+    <div class="recipe-card">
+        <h2>Pumpkin Soup</h2>
+        <div class="recipe-img">
+            <img src="/IMAGES/pumpkin soup.jpeg" alt="Pumpkin Soup">
+        </div>
+        <div class="recipe-content">
+            <h3>Ingredients</h3>
+            <p>200 ml milk<br>50 g butter<br>3 eggs<br>1 tsp cocoa<br>2 tsp baking soda<br>A pinch of salt</p>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <h2>Coleslaw Dressing</h2>
+        <div class="recipe-img">
+            <img src="/IMAGES/colesaw dressing.jpeg" alt="Coleslaw Dressing">
+        </div>
+        <div class="recipe-content">
+            <h3>Ingredients</h3>
+            <p>4 cups cabbage<br>1/4 cup mayo<br>1 tbsp wasabi paste<br>1/4 cup apple cider vinegar</p>
+        </div>
+    </div>
+
+    <div class="recipe-card">
+        <h2>Brulle Cheese Cake</h2>
+        <div class="recipe-img">
+            <img src="/IMAGES/brulle cheese cake.jpeg" alt="Brulle Cheese Cake">
+        </div>
+        <div class="recipe-content">
+            <h3>Ingredients</h3>
+            <p>2 cups of cream<br>1/2 tsp of flavor<br>3 tbsp of color<br>1 cup of kindness</p>
+        </div>
+    </div>
+</div>
+
+<div class="heading-container">
+    <h1>TOP 10 VEG RECIPES</h1>
+    <div class="rightArrow">
+        <img src="https://cdn1.iconfinder.com/data/icons/arrows-14/24/Arrow-Right_in_Circle-64.png" alt="Arrow Icon">
+    </div>
+</div>
+
+<div class="recipeContainer">
+    <div class="recipeCard">
+        <div class="recipe_img">
+            <img src="/IMAGES/dum aloo.jpeg" alt="Dum Aloo">
+        </div>
+    </div>
+    <div class="recipeCard">
+        <div class="recipe_img">
+            <img src="/IMAGES/ghuguni.jpeg" alt="Ghugni">
+        </div>
+    </div>
+    <div class="recipeCard">
+        <div class="recipe_img">
+            <img src="/IMAGES/dahi vada.jpeg" alt="Dahi Vada">
+        </div>
+    </div>
+</div>
+
+<div class="headingContainer">
+    <h1>TOP 10 NON-VEG RECIPES</h1>
+    <div class="rightArrow">
+        <img src="https://cdn1.iconfinder.com/data/icons/arrows-14/24/Arrow-Right_in_Circle-64.png" alt="Arrow Icon">
+    </div>
+</div>
+
+<div class="recipeContainer">
+    <div class="recipeCard">
+        <div class="recipe_img">
+            <img src="/IMAGES/chicken salad.jpeg" alt="Chicken Salad">
+        </div>
+    </div>
+    <div class="recipeCard">
+        <div class="recipe_img">
+            <img src="/IMAGES/shrimp pasta.jpeg" alt="Shrimp Pasta">
+        </div>
+    </div>
+    <div class="recipeCard">
+        <div class="recipe_img">
+            <img src="/IMAGES/butter chicken.jpg" alt="Butter Chicken">
+        </div>
+    </div>
+</div>
+
+<div class="headingContainer">
+    <h1>REPLAY YOUR RECIPES</h1>
+    <div class="rightArrow">
+        <img src="https://cdn1.iconfinder.com/data/icons/arrows-14/24/Arrow-Right_in_Circle-64.png" alt="Arrow Icon">
+    </div>
+</div>
+
+<div class="recipeContainer">
+    <div class="recipeCard">
+        <div class="recipe_img">
+            <img src="/IMAGES/creamy pasta.jpeg" alt="Creamy Pasta">
+        </div>
+    </div>
+    <div class="recipeCard">
+        <div class="recipe_img">
+            <img src="/IMAGES/Rasmalai.jpeg" alt="Ras Malai">
+        </div>
+    </div>
+    <div class="recipeCard">
+        <div class="recipe_img">
+            <img src="/IMAGES/pav bhaji.jpeg" alt="Pav Bhaji">
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/app-footer') %>
+
+<script src="/JS/cook2.js"></script>
+<%- include('../partials/foot') %>

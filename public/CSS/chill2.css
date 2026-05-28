@@ -1,142 +1,128 @@
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-color:rgb(237, 233, 248);
+    margin: 0;
+    background: #ede9f8;
     color: #333;
 }
 
-/* Header and Navigation */
 .header {
-    background-color:rgb(101, 63, 203);
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: #653fcb;
+    padding: 16px 24px;
 }
 
-.logo img {
-    height: 40px;
-    width: auto;
-    border-radius: 23px;
+.nav {
+    width: min(100%, 1180px);
+    margin: 0 auto;
 }
 
 .nav ul {
-    list-style-type: none;
+    list-style: none;
     display: flex;
-    gap: 15px;
+    align-items: center;
+    gap: 16px;
+    padding: 0;
 }
 
-.nav ul li {
-    display: inline;
-}
-
-.nav ul li a {
+.nav a {
     color: white;
     text-decoration: none;
-    font-size: 1.1em;
+    font-size: 1rem;
 }
 
-.nav ul li a:hover {
-    text-decoration: underline;
+.profile-icon {
+    margin-left: auto;
 }
 
-/* Main Content Area */
 .main-content {
-    max-width: 1200px;
+    width: min(100%, 1180px);
     margin: 0 auto;
-    padding: 20px;
+    padding: 24px;
 }
 
-/* Search Bar and Filters */
 .search-section {
-    text-align: center;
-    margin-bottom: 30px;
+    display: grid;
+    gap: 16px;
+    margin-bottom: 26px;
 }
 
 .search-input {
-    width: 80%;
-    padding: 10px;
-    border-radius: 20px;
-    border: 2px solid rgb(198, 184, 236);
-    margin-bottom: 15px;
-    font-size: 1.1em;
+    width: 100%;
+    min-height: 50px;
+    padding: 0 18px;
+    border-radius: 999px;
+    border: 2px solid rgba(101, 63, 203, 0.18);
+    background: rgba(255, 255, 255, 0.92);
 }
 
 .filter-buttons {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Create 5 equal columns */
-    gap: 10px; /* Add some spacing between the buttons */
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
 }
 
 .filter-buttons button {
-    background-color: rgb(237, 233, 248);
-    color: rgb(16, 15, 15);
-    padding: 8px 15px;
-    border: 2px solid black;
-    border-radius: 20px;
+    border-radius: 999px;
+    border: 1px solid rgba(39, 50, 69, 0.16);
+    background: rgba(255, 255, 255, 0.7);
+    min-height: 42px;
     cursor: pointer;
-    font-size: 1em;
 }
 
 .filter-buttons button:hover {
-    background-color: rgb(106, 55, 245);
+    background: #6a37f5;
     color: white;
 }
 
 .movie-section {
-    background-color: rgb(207, 194, 241); /* Light purple background */
+    background-color: #cfc2f1;
     padding: 20px;
-    border-radius: 20px; /* Rounded corners */
-    margin-bottom: 40px; /* Spacing between sections */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a soft shadow for depth */
+    border-radius: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 14px 32px rgba(34, 26, 68, 0.08);
+}
+
+.movie-section h2 {
+    margin-bottom: 16px;
 }
 
 .movie-list {
-    display: flex;
-    gap: 100px;
-    justify-content: center; /* Center the content */
-    padding: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
 }
 
 .movie-list img {
-    width: 200px;
-    height: 240px;
-    border-radius: 10px; /* Optional: rounded corners for images */
+    width: 100%;
+    aspect-ratio: 5 / 6;
+    border-radius: 18px;
     object-fit: cover;
-    transition: transform 0.3s ease; /* Smooth hover effect */
+    transition: transform 0.25s ease;
 }
 
 .movie-list img:hover {
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: scale(1.03);
 }
 
-
-/* Footer */
-.footer {
-    background-color:rgb(107, 90, 152);
-    padding: 20px;
-    text-align: center;
-    margin-top: 40px;
+.media-card {
+    position: relative;
 }
 
-.footer p {
-    color: white;
-    font-size: 1.2em;
-}
+@media (max-width: 720px) {
+    .header,
+    .main-content {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
 
-.social-icons {
-    margin-top: 15px;
-}
+    .nav ul {
+        flex-wrap: wrap;
+    }
 
-.social-icons a img {
-    width: 30px;
-    height: 30px;
-    margin: 0 10px;
-    filter: invert(1); /* Makes the icons white on dark background */
+    .profile-icon {
+        margin-left: 0;
+    }
 }

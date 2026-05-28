@@ -1,0 +1,28 @@
+<%- include('../partials/head', { title, stylesheet: '/CSS/sign-up.css' }) %>
+
+<div class="container">
+    <div class="form-container">
+        <h2>SIGN UP</h2>
+        <form id="signup-form">
+            <label for="username">USERNAME</label>
+            <input type="text" id="username" placeholder="Enter username" autocomplete="username" required>
+
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" placeholder="Enter email" autocomplete="email" required>
+
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Enter password" autocomplete="new-password" required>
+            </div>
+
+            <button type="submit" class="submit-btn" id="signupButton">SIGN UP</button>
+            <p id="signupMessage" class="signup-link" aria-live="polite"></p>
+            <p class="signup-link">ALREADY HAVE AN ACCOUNT? <a href="/login">LOGIN</a></p>
+        </form>
+    </div>
+    <div class="image-container">
+        <img src="/IMAGES/blue1.jpg" alt="Sign up image">
+    </div>
+</div>
+
+<script src="/JS/sign-up.js"></script>
+<%- include('../partials/foot') %>

@@ -1,0 +1,103 @@
+<%- include('../partials/head', { title, stylesheet: '/CSS/personal.css' }) %>
+
+<div class="container">
+    <%- include('../partials/account-sidebar', { activePage }) %>
+
+    <div class="content">
+        <div class="top-bar">
+            <div class="home">
+                <a href="/">Home</a>
+            </div>
+        </div>
+
+        <h1>PERSONAL</h1>
+        <div class="profile-grid">
+            <section class="profile-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Profile Details</h2>
+                        <p>Update your account information and keep your profile current.</p>
+                    </div>
+                    <div class="profile-badges">
+                        <span id="profileUsernameBadge" class="secondary-badge"></span>
+                    </div>
+                </div>
+
+                <form id="profileForm" class="form">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" class="input-field" placeholder="Enter full name">
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="input-field" placeholder="Enter email" disabled>
+
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" class="input-field" placeholder="Enter phone number">
+
+                    <label for="dob">DOB</label>
+                    <input type="date" id="dob" class="input-field" placeholder="Select date of birth">
+
+                    <div class="panel-actions">
+                        <button type="submit" class="action-button" id="profileSaveButton">Save Profile</button>
+                    </div>
+                    <p id="profileStatus" class="status-message" hidden></p>
+                </form>
+            </section>
+
+            <aside class="profile-panel summary-panel">
+                <h2>Account Snapshot</h2>
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <span class="summary-label">Favorites</span>
+                        <strong id="favoritesCount">0</strong>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-label">Uploaded Recipes</span>
+                        <strong id="recipesCount">0</strong>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-label">Reviews</span>
+                        <strong id="reviewsCount">0</strong>
+                    </div>
+                </div>
+                <a href="/saved" class="secondary-button">Manage Favorites</a>
+            </aside>
+        </div>
+
+        <div class="profile-grid lower-grid">
+            <section class="profile-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Change Password</h2>
+                        <p>Keep your account secure with a fresh password.</p>
+                    </div>
+                </div>
+                <form id="passwordForm" class="form">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" class="input-field" placeholder="Enter current password">
+
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" class="input-field" placeholder="Enter new password">
+
+                    <div class="panel-actions">
+                        <button type="submit" class="action-button" id="passwordSaveButton">Update Password</button>
+                    </div>
+                    <p id="passwordStatus" class="status-message" hidden></p>
+                </form>
+            </section>
+
+            <section class="profile-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Your Uploaded Recipes</h2>
+                        <p>Quickly jump back into recipes you created.</p>
+                    </div>
+                    <a href="/cook/upload" class="secondary-button">Open Recipe Studio</a>
+                </div>
+                <div id="profileRecipes" class="managed-list"></div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script src="/JS/personal.js"></script>
+<%- include('../partials/foot') %>

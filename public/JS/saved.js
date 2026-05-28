@@ -1,84 +1,88 @@
-// Get the container of favorite items
-const favoriteItemsContainer = document.querySelector(".favorites");
+document.addEventListener('DOMContentLoaded', async () => {
+    const favoritesGrid = document.getElementById('favoritesGrid');
+    const favoritesLoading = document.getElementById('favoritesLoading');
+    const favoritesEmpty = document.getElementById('favoritesEmpty');
+    const favoritesStatus = document.getElementById('favoritesStatus');
+    const refreshButton = document.getElementById('refreshFavoritesButton');
 
-// Initialize the saved favorites array from localStorage
-let savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-// Function to create the heart icon
-function createHeartIcon(isSaved) {
-    const heartIcon = document.createElement("span");
-    heartIcon.className = "remove-btn";
-    heartIcon.textContent = isSaved ? "💔" : "❤️"; // Show broken heart if saved, else heart icon
-    return heartIcon;
-}
-
-// Initialize the favorite items with heart icons and saved status
-function initializeFavorites() {
-    // Get all the favorite items dynamically to avoid issues
-    const favoriteItems = favoriteItemsContainer.querySelectorAll(".favorite-item");
-
-    favoriteItems.forEach((item, index) => {
-        // Check if the heart icon is already added to avoid duplicates
-        if (!item.querySelector(".remove-btn")) {
-            const isSaved = savedFavorites.includes(index);
-            const heartIcon = createHeartIcon(isSaved);
-
-            // Append the heart icon to the favorite item
-            item.appendChild(heartIcon);
-
-            // Mark the item as saved if it's in localStorage
-            if (isSaved) {
-                item.classList.add("saved");
-            }
-
-            // Add click event to toggle the favorite status
-            heartIcon.addEventListener("click", () => toggleFavorite(item, index));
-        }
-    });
-}
-
-// Function to toggle favorite state
-function toggleFavorite(item, index) {
-    const heartIcon = item.querySelector(".remove-btn");
-
-    if (item.classList.contains("saved")) {
-        // Remove from saved status
-        item.classList.remove("saved");
-        heartIcon.textContent = "❤️"; // Set to heart icon
-        // Remove index from localStorage array
-        savedFavorites = savedFavorites.filter((fav) => fav !== index);
-    } else {
-        // Mark as saved
-        item.classList.add("saved");
-        heartIcon.textContent = "💔"; // Set to broken heart icon
-        // Add index to localStorage array
-        savedFavorites.push(index);
+    if (!favoritesGrid || !favoritesLoading || !favoritesEmpty || !refreshButton) {
+        return;
     }
 
-    // Update localStorage
-    localStorage.setItem("favorites", JSON.stringify(savedFavorites));
-}
+    async function loadFavorites(forceRefresh = false) {
+        favoritesLoading.hidden = false;
+        favoritesLoading.innerHTML = window.CookChill.createSpinnerLabel('Loading your saved items...');
+        favoritesGrid.hidden = true;
+        favoritesEmpty.hidden = true;
 
-// Clear all saved favorites
-function clearAllFavorites() {
-    savedFavorites = [];
-    localStorage.setItem("favorites", JSON.stringify(savedFavorites));
-    const favoriteItems = favoriteItemsContainer.querySelectorAll(".favorite-item");
-    favoriteItems.forEach((item) => {
-        item.classList.remove("saved");
-        const heartIcon = item.querySelector(".remove-btn");
-        if (heartIcon) heartIcon.textContent = "❤️";
-    });
-}
+        try {
+            const favorites = await window.CookChill.loadFavorites(forceRefresh);
 
-// Initialize favorites on page load
-initializeFavorites();
+            if (!favorites.length) {
+                favoritesEmpty.hidden = false;
+                favoritesGrid.hidden = true;
+                return;
+            }
 
-// Optional: Clear all favorites button
-const clearButton = document.createElement("button");
-clearButton.textContent = "Clear All Favorites";
-clearButton.className = "clear-btn";
-document.querySelector(".content").appendChild(clearButton);
+            favoritesGrid.innerHTML = favorites.map((favorite) => `
+                <article class="favorite-item" data-favorite-id="${favorite._id}">
+                    <img src="${favorite.targetImage || '/IMAGES/logo.png'}" alt="${favorite.targetTitle}">
+                    <div class="favorite-card-body">
+                        <span class="favorite-pill">${favorite.targetType}</span>
+                        <h3>${favorite.targetTitle}</h3>
+                        <div class="favorite-actions">
+                            <button type="button" class="secondary-button remove-favorite-button">Remove</button>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
 
-clearButton.addEventListener("click", clearAllFavorites);
+            favoritesGrid.hidden = false;
+            favoritesGrid.querySelectorAll('.remove-favorite-button').forEach((button) => {
+                button.addEventListener('click', async () => {
+                    const card = button.closest('[data-favorite-id]');
+                    const favoriteId = card?.dataset.favoriteId;
+                    if (!favoriteId) {
+                        return;
+                    }
 
+                    button.disabled = true;
+                    button.innerHTML = window.CookChill.createSpinnerLabel('Removing...');
+
+                    try {
+                        await window.CookChill.fetchJson(`/api/favorites/${favoriteId}`, {
+                            method: 'DELETE',
+                        });
+                        window.CookChill.setStatus(favoritesStatus, 'Favorite removed successfully.', 'success');
+                        await loadFavorites(true);
+                    } catch (error) {
+                        console.error('Favorite delete error:', error);
+                        window.CookChill.setStatus(favoritesStatus, window.CookChill.normalizeErrorMessage(error, 'Unable to remove favorite.'), 'error');
+                        button.disabled = false;
+                        button.textContent = 'Remove';
+                    }
+                });
+            });
+        } catch (error) {
+            console.error('Favorites load error:', error);
+            window.CookChill.setStatus(favoritesStatus, window.CookChill.normalizeErrorMessage(error, 'Unable to load favorites.'), 'error');
+            favoritesLoading.innerHTML = `
+                <div class="empty-state">
+                    <div>
+                        <h2>Could not load favorites</h2>
+                        <p>Please try again in a moment.</p>
+                    </div>
+                </div>
+            `;
+        } finally {
+            favoritesLoading.hidden = false;
+            if (!favoritesGrid.hidden || !favoritesEmpty.hidden) {
+                favoritesLoading.hidden = true;
+            }
+        }
+    }
+
+    refreshButton.addEventListener('click', () => loadFavorites(true));
+
+    await loadFavorites(true);
+});

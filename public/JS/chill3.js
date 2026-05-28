@@ -1,65 +1,99 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // 1. Star Rating Selection
+document.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.stars input');
+    const chartBars = document.querySelectorAll('.bar');
+    const form = document.getElementById('chillReviewForm');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const status = document.getElementById('chillReviewStatus');
+    const submitButton = document.getElementById('chillReviewButton');
+    const feedbackData = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
     let selectedRating = 0;
 
-    stars.forEach(star => {
-        star.addEventListener('change', function (event) {
-            selectedRating = event.target.value;
+    const updateStarStyles = (rating) => {
+        stars.forEach((star) => {
+            const label = star.nextElementSibling;
+            label.style.color = Number(star.value) <= rating ? '#FFD700' : '#ccc';
+        });
+    };
+
+    const updateFeedbackChart = (rating) => {
+        feedbackData[rating] += 1;
+        chartBars.forEach((bar) => {
+            const starCount = bar.getAttribute('data-stars');
+            bar.style.width = `${Math.max(feedbackData[starCount] * 18, 8)}%`;
+        });
+    };
+
+    stars.forEach((star) => {
+        star.addEventListener('change', (event) => {
+            selectedRating = Number(event.target.value);
             updateStarStyles(selectedRating);
         });
     });
 
-    function updateStarStyles(rating) {
-        stars.forEach(star => {
-            const label = star.nextElementSibling;
-            if (star.value <= rating) {
-                label.style.color = '#FFD700'; // Highlight selected stars in gold
-            } else {
-                label.style.color = '#ccc'; // Unselected stars are grey
-            }
-        });
-    }
-
-    // 2. Real-Time Feedback Chart Update
-    const chartBars = document.querySelectorAll('.bar');
-    const feedbackData = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-
-    function updateFeedbackChart(rating) {
-        feedbackData[rating]++;
-        chartBars.forEach(bar => {
-            const starCount = bar.getAttribute('data-stars');
-            bar.style.width = `${feedbackData[starCount] * 20}%`;
-        });
-    }
-
-    // 3. Form Submission and Validation
-    const form = document.querySelector('.review-form form');
-    form.addEventListener('submit', function (event) {
+    form?.addEventListener('submit', async (event) => {
         event.preventDefault();
         const comment = form.querySelector('textarea').value.trim();
 
-        if (selectedRating === 0) {
-            alert('Please select a star rating.');
-        } else if (comment === '') {
-            alert('Please leave a comment.');
-        } else {
-            alert('Thank you for your feedback!');
+        if (!selectedRating) {
+            window.CookChill.setStatus(status, 'Please select a star rating.', 'error');
+            return;
+        }
+
+        if (!comment) {
+            window.CookChill.setStatus(status, 'Please leave a comment.', 'error');
+            return;
+        }
+
+        try {
+            submitButton.disabled = true;
+            submitButton.innerHTML = window.CookChill.createSpinnerLabel('Submitting...');
+            await window.CookChill.requireAuthenticatedUser();
+            await window.CookChill.fetchJson('/api/reviews', {
+                method: 'POST',
+                body: JSON.stringify({
+                    targetType: 'ENTERTAINMENT',
+                    targetTitle: 'Chill Community Feedback',
+                    comment,
+                }),
+            });
+
+            await window.CookChill.fetchJson('/api/ratings', {
+                method: 'POST',
+                body: JSON.stringify({
+                    targetType: 'ENTERTAINMENT',
+                    targetTitle: 'Chill Community Feedback',
+                    value: selectedRating,
+                }),
+            });
+
             updateFeedbackChart(selectedRating);
+            window.CookChill.setStatus(status, 'Thank you for your feedback!', 'success');
             form.reset();
-            updateStarStyles(0); // Reset star colors
+            selectedRating = 0;
+            updateStarStyles(0);
+        } catch (error) {
+            if (error.status === 401) {
+                window.CookChill.redirectToLogin('/chill/reviews');
+                return;
+            }
+
+            console.error('Chill review error:', error);
+            window.CookChill.setStatus(status, window.CookChill.normalizeErrorMessage(error, 'Unable to submit your review right now.'), 'error');
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Submit';
         }
     });
 
-    // 4. Smooth Scroll Navigation
-    const navLinks = document.querySelectorAll('.nav-links a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
+    navLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            if (!link.getAttribute('href').startsWith('#')) {
+                return;
+            }
+
             event.preventDefault();
             const targetSection = document.querySelector(link.getAttribute('href'));
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-            }
+            targetSection?.scrollIntoView({ behavior: 'smooth' });
         });
     });
 });

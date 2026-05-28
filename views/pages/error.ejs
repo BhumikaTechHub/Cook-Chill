@@ -1,0 +1,11 @@
+<%- include('../partials/head', { title }) %>
+
+<main style="min-height: 100vh; display: grid; place-items: center; padding: 24px; text-align: center; font-family: Arial, sans-serif;">
+    <div>
+        <p style="font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: #888;">Error <%= statusCode %></p>
+        <h1 style="margin: 12px 0;"><%= message %></h1>
+        <p><a href="/" style="color: #0a66c2; text-decoration: none;">Return to the homepage</a></p>
+    </div>
+</main>
+
+<%- include('../partials/foot') %>

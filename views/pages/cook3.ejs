@@ -1,0 +1,77 @@
+<%- include('../partials/head', { title, stylesheet: '/CSS/cook3.css' }) %>
+
+<header>
+    <div class="logo">
+        <img src="/IMAGES/logo.png" alt="Logo">
+    </div>
+    <nav>
+        <a href="/">HOME</a>
+        <div class="profile-icon">
+            <a href="/profile">
+                <span>&#128100;</span>
+            </a>
+        </div>
+    </nav>
+</header>
+
+<h1>SHARE YOUR CULINARY CREATIONS</h1>
+
+<div class="container">
+    <div class="upload-section">
+        <div class="upload-icon">
+            <img src="/IMAGES/upload-icon.png" alt="Upload Icon">
+        </div>
+        <button id="uploadButton" type="button" class="action-button">Upload Recipe</button>
+        <p class="upload-helper">Create, update, and manage recipes tied to your account.</p>
+    </div>
+
+    <div class="recipe-details">
+        <h2 class="details-title">RECIPE DETAILS</h2>
+        <hr>
+        <label for="title">TITLE</label>
+        <input type="text" id="title" value="UNTITLED RECIPE" style="background-color: #ffa50000; padding: 8px; font-weight: 800;">
+
+        <label for="description">DESCRIPTION</label>
+        <textarea id="description" rows="5" style="background-color: #ffa50000;"></textarea>
+        <hr>
+        <label for="ingredients">MAIN INGREDIENTS</label>
+        <textarea id="ingredients" rows="4" style="background-color: #ffa50000;"></textarea>
+        <hr>
+        <label for="category">CATEGORY</label>
+        <select id="category" style="font-weight: 800;">
+            <option>Select a Category</option>
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+            <option>Dessert</option>
+        </select>
+    </div>
+
+    <div class="additional-details">
+        <label for="tags">TAGS</label>
+        <div class="tags-input">
+            <input type="text" id="tags" placeholder="Add tags">
+            <button class="add-tag" type="button">ADD TAG</button>
+            <span class="plus-sign">+</span>
+        </div>
+        <div class="toolbar studio-toolbar">
+            <div class="toolbar-group">
+                <label for="recipeSort">Sort</label>
+                <select id="recipeSort">
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                </select>
+            </div>
+        </div>
+        <p id="recipeStatus" class="status-message" hidden></p>
+    </div>
+
+    <div class="current-recipes-section">
+        <h2 class="recipes-title">YOUR CURRENT RECIPES</h2>
+        <div id="recipeListLoading" class="loading-state"></div>
+        <div id="recipeList"></div>
+    </div>
+</div>
+
+<script src="/JS/cook3.js"></script>
+<%- include('../partials/foot') %>

@@ -1,154 +1,74 @@
-// JavaScript code for your sign-up page
-/*
-// Password visibility toggle
-const passwordInput = document.getElementById('password');
-// const togglePassword = document.getElementById('togglePassword');
-
-// togglePassword.addEventListener('click', () => {
-//     // Toggle the input type between 'password' and 'text'
-//     if (passwordInput.type === 'password') {
-//         passwordInput.type = 'text';
-//         togglePassword.textContent = '👁️'; // Change icon to monkey (hide)
-//     } else {
-//         passwordInput.type = 'password';
-//         togglePassword.textContent = '🙈'; // Change icon to eye (show)
-//     }
-// });
-
-
 document.addEventListener('DOMContentLoaded', () => {
-    const signUpForm = document.getElementById('signup-form');
-// Form validation on click of sign-up button
+    const form = document.getElementById('signup-form');
+    const usernameInput = document.getElementById('username');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const messageElement = document.getElementById('signupMessage');
+    const submitButton = document.getElementById('signupButton');
 
-if (signUpForm) {
-signUpForm.addEventListener('submit',async (event) => {
-    event.preventDefault(); // Prevent form submission for demo purposes
-
-    const username = document.getElementById('username').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = passwordInput.value.trim();
-
-    // Basic validation checks
-    if (!username || !email || !password) {
-        alert('Please fill in all fields.');
+    if (!form || !usernameInput || !emailInput || !passwordInput) {
         return;
     }
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-        alert('Please enter a valid email address.');
-        return;
-    }
-
-    try {
-        // Send a POST request to the server
-        const response = await fetch('/signup', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ USERNAME:username, EMAIL:email, PASSWORD:password}),
-        });
-
-        // Handle the server's response
-        const data = await response.json();
-        if (response.ok) {
-            alert(data.message);
-            window.location.href = '/login'; // Redirect to login page
-        } else {
-            alert(data.message);
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-    }
-    
-});
-}
-
-// Toggle password visibility
-const togglePassword = document.getElementById('togglePassword');
-if (togglePassword) {
-    togglePassword.addEventListener('click', () => {
-        const passwordInput = document.getElementById('password');
-        const type = passwordInput.type === 'password' ? 'text' : 'password';
-        passwordInput.type = type;
-
-        // Update icon or text for visibility toggle
-        togglePassword.textContent = type === 'text' ? '🙈' : '👁️';
-    });
-}
-
-// Google sign-up button demo click
-const googleSignUpButton = document.getElementById('googleSignUp');
-if (googleSignUpButton) {
-googleSignUpButton.addEventListener('click', () => {
-    window.open('https://accounts.google.com/signin', '_blank');
-});
-}
-});
-
-*/
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-
-class SignUpForm {
-    constructor(formId, usernameId, emailId, passwordId) {
-        this.form = document.getElementById(formId);
-        this.usernameInput = document.getElementById(usernameId);
-        this.emailInput = document.getElementById(emailId);
-        this.passwordInput = document.getElementById(passwordId);
-
-        // Bind methods
-        this.bindEvents();
-    }
-
-    bindEvents() {
-        // Listen for form submission
-        this.form.addEventListener('submit', this.handleSubmit.bind(this));
-    }
-
-    async handleSubmit(e) {
-        e.preventDefault();
-
-        const username = this.usernameInput.value;
-        const email = this.emailInput.value;
-        const password = this.passwordInput.value;
-
-        // Simple validation
-        if (!username || !email || !password) {
-            alert('All fields are required!');
+    function showMessage(message, tone = 'error') {
+        if (!messageElement) {
+            window.alert(message);
             return;
         }
 
-        try {
-            const response = await this.submitForm(username, email, password);
-            const data = await response.json();
-            console.log("Response data:", data);  // Log the response for debugging
+        messageElement.textContent = message;
+        messageElement.style.color = tone === 'error' ? '#d93025' : '#188038';
+    }
 
-            if (response.ok) {
-                alert(data.message);
-                window.location.href = 'login.html'; // Redirect to login after successful sign-up
-            } else {
-                alert(data.message);
-            }
-        } catch (error) {
-            console.error('Error during sign-up:', error);
-            alert('There was an error processing your request. Please try again.');
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const username = usernameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        if (username.length < 3) {
+            showMessage('Username must be at least 3 characters long.');
+            usernameInput.focus();
+            return;
         }
-    }
 
-    async submitForm(username, email, password) {
-        return fetch('/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ USERNAME: username, EMAIL: email, PASSWORD: password }),
-        });
-    }
-}
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showMessage('Please enter a valid email address.');
+            emailInput.focus();
+            return;
+        }
 
-// Initialize the sign-up form
-const signUpForm = new SignUpForm('signup-form', 'username', 'email', 'password');
+        if (password.length < 6) {
+            showMessage('Password must be at least 6 characters long.');
+            passwordInput.focus();
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.innerHTML = window.CookChill.createSpinnerLabel('Creating...');
+        showMessage('Creating your account...', 'success');
+
+        try {
+            const data = await window.CookChill.fetchJson('/signup', {
+                method: 'POST',
+                body: JSON.stringify({
+                    USERNAME: username,
+                    EMAIL: email,
+                    PASSWORD: password,
+                }),
+            });
+
+            showMessage(data.message || 'User signed up successfully.', 'success');
+            window.setTimeout(() => {
+                window.location.href = data.redirectTo || '/login';
+            }, 600);
+        } catch (error) {
+            console.error('Signup error:', error);
+            showMessage(window.CookChill.normalizeErrorMessage(error, 'There was an error processing your request. Please try again.'));
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'SIGN UP';
+        }
+    });
 });
