@@ -40,7 +40,7 @@ body {
 
 .contact-form, .contact-info {
     flex: 1;
-    min-width: 300px;
+    min-width: min(300px, 90vw);
 }
 
 .contact-form h2, .contact-info h2 {

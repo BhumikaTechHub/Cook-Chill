@@ -14,12 +14,13 @@ body {
 .container {
     display: flex;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    flex-wrap: nowrap;
 }
 
 /* Sidebar styling */
 .sidebar {
-    width: 25%;
+    width: clamp(180px, 24vw, 280px);
     background: linear-gradient(to bottom, #FFB08D, #88DAC1);
     display: flex;
     flex-direction: column;
@@ -117,7 +118,7 @@ nav ul li img.icon {
 
 /* Content area styling */
 .content {
-    width: 75%;
+    flex: 1 1 auto;
     padding: 40px;
 }
 

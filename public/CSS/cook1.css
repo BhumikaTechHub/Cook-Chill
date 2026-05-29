@@ -80,7 +80,8 @@ body {
 .dynamic-section {
     font-size: 30px;
     padding: 20px;
-    margin-left: 60px;
+    margin-left: 0;
+    padding-inline: clamp(12px, 4vw, 24px);
     border-radius: 8px;
     margin-bottom: 20px;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -93,16 +94,11 @@ body {
 }
 
 .image-part img {
-    /* max-width: 100%; */
-    /* height: auto; */
     display: block;
     margin: 0 auto;
     object-fit: cover; /* Ensures images fit within their container without distortion */
-}
-.image-part img {
-    max-width: 400px; /* Adjust to desired width */
-    max-height: 200px; /* Adjust to desired height */
-    
+    max-width: clamp(160px, 38vw, 400px);
+    height: auto;
 }
 .image-part {
     text-align: center;

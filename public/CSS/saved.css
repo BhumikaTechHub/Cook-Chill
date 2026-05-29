@@ -6,7 +6,7 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: 280px minmax(0, 1fr);
+    grid-template-columns: clamp(200px, 22vw, 280px) minmax(0, 1fr);
     min-height: 100vh;
 }
 
@@ -20,8 +20,8 @@ body {
 }
 
 .logo {
-    width: 68px;
-    height: 68px;
+    width: clamp(44px, 7vw, 68px);
+    height: auto;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid rgba(255, 255, 255, 0.72);
@@ -32,8 +32,8 @@ body {
 }
 
 .profile-pic {
-    width: 92px;
-    height: 92px;
+    width: clamp(56px, 12vw, 92px);
+    height: auto;
     border-radius: 50%;
     margin: 0 auto 12px;
     object-fit: cover;

@@ -1,0 +1,94 @@
+/* Responsive utilities and layout overrides for Cook & Chill */
+:root{
+  --container-width:90%;
+  --container-max:1400px;
+  --brand-color:#f4a23e;
+  --accent:#16324a;
+  --muted:#6b7280;
+  --radius:10px;
+  --shadow: 0 6px 18px rgba(22,50,74,0.06);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;padding:0}
+body{font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:#212529; -webkit-font-smoothing:antialiased}
+
+/* Container system */
+.container{width:var(--container-width); max-width:var(--container-max); margin:0 auto;}
+.container-max{width:var(--container-width); max-width:var(--container-max); margin:0 auto;}
+.section{padding:clamp(1rem,3vw,2.5rem) 0}
+.section--tight{padding:clamp(.6rem,2vw,1.2rem) 0}
+
+/* Responsive typography */
+h1{font-family: 'Georgia', serif; font-size:clamp(2rem,4vw,4rem); margin:.25em 0}
+h2{font-size:clamp(1.4rem,2.6vw,2rem); margin:.4em 0}
+h3{font-size:clamp(1.1rem,1.8vw,1.4rem); margin:.35em 0}
+p,li,button,a,span{font-size:clamp(.95rem,1vw,1.1rem)}
+
+/* Images */
+img, picture, video{max-width:100%; height:auto; display:block}
+
+/* Cards */
+.card{background:#fff;border-radius:var(--radius); box-shadow:var(--shadow); padding:1rem}
+.card h3{margin-top:0}
+
+/* Buttons */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.6rem 1rem; border-radius:8px; border:none; cursor:pointer}
+.btn-primary{background:var(--brand-color); color:#fff}
+.btn-ghost{background:transparent; border:1px solid rgba(0,0,0,.06)}
+
+/* Grid helpers for cards */
+.card-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem}
+
+/* Forms */
+label{display:block; font-weight:600; margin-bottom:.35rem}
+input[type=text], input[type=password], input[type=email], textarea, select{width:100%; padding:.6rem .75rem; border-radius:8px; border:1px solid #e6e6e6}
+textarea{min-height:120px}
+
+/* Navbar utilities */
+.site-header{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.6rem 0}
+.nav-links{display:flex; gap:1rem; align-items:center}
+.nav-links a{padding:.4rem .6rem; border-radius:8px}
+.menu-toggle{display:none; background:transparent; border:none; font-size:1.25rem}
+
+/* Generic nav element fallbacks (applies to pages using plain <nav> structures) */
+nav{display:flex; align-items:center; gap:1rem}
+nav ul{display:flex; gap:1rem; align-items:center; list-style:none; margin:0; padding:0}
+nav a{display:inline-block}
+
+@media (max-width:768px){
+  nav ul{flex-direction:column; gap:.5rem}
+  nav{position:relative}
+  nav.collapsed ul{display:none}
+  nav.open ul{display:flex; position:fixed; right:0; top:64px; background:#fff; padding:1rem; width:260px; box-shadow:0 10px 30px rgba(0,0,0,.08)}
+}
+
+/* Footer */
+.site-footer{padding:1.2rem 0; background:#fafafa}
+
+/* Accessibility */
+:focus{outline:3px solid rgba(20,100,180,.12); outline-offset:2px}
+
+/* Prevent horizontal overflow */
+html,body{overflow-x:hidden}
+
+/* Breakpoints */
+@media (max-width:1200px){
+  .container{width:94%}
+}
+@media (max-width:992px){
+  .nav-links{gap:.5rem}
+}
+@media (max-width:768px){
+  .menu-toggle{display:inline-flex}
+  .nav-links{position:fixed; right:0; top:64px; background:#fff; height:calc(100% - 64px); width:min(90vw,320px); transform:translateX(110%); transition:transform .22s ease; flex-direction:column; padding:1rem; box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .nav-links.open{transform:translateX(0)}
+  .nav-links a{padding:1rem}
+}
+@media (max-width:576px){
+  .card-grid{gap:.6rem}
+  .menu-toggle{font-size:1.1rem}
+}
+
+/* Utility helpers */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

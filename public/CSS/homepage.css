@@ -111,7 +111,7 @@ nav button {
 
 /* Image Styling */
 .section2 img {
-    width: 150px;
+    width: clamp(100px, 18vw, 150px);
     height: auto;
     border-radius: 12px;
     object-fit: cover;
@@ -154,7 +154,7 @@ nav button {
 }
 
 .img4 {
-    width: 360px;
+    width: clamp(160px, 30vw, 360px);
     height: auto;
     border-radius: 12px;
     object-fit: cover;
@@ -215,8 +215,8 @@ nav button {
 }
 
 .img5 {
-    width: 300px;
-    height: 200px;
+    width: clamp(140px, 28vw, 300px);
+    height: auto;
     border-radius: 12px;
     object-fit: cover;
 }
@@ -231,14 +231,12 @@ nav button {
 
 
 .content-container {
-    display: flex;
-    flex-wrap: nowrap; 
-    overflow-x: auto; 
-    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
-    align-items: center; 
-    justify-content: center;  
-
+    padding: 20px;
+    align-items: start;
+    justify-items: center;
 }
 
 .boxbox1, .boxbox2, .boxbox6 {
@@ -255,13 +253,12 @@ nav button {
 }
 
 .box {
-    flex: 0 0 auto;
     background-color: #f2f2f2;
     border: 1px solid #ddd;
     padding: 20px;
     margin: 5px;
     border-radius: 10px;
-    min-width: 250px;
+    width: 100%;
     text-align: center;
 }
 
@@ -416,6 +413,9 @@ nav button {
         margin-top: 20px;
         gap: 10px;
     }
+
+    /* ensure button container participates in flow on small screens */
+    .button-container{ position: static; margin-top: 12px; display:flex; justify-content:flex-end; gap:8px }
 
     .btn1 {
         font-size: 1em;
