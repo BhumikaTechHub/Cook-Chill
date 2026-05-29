@@ -7,11 +7,15 @@ const { serializeUser } = require('../utils/serializers');
 exports.signUp = async (req, res) => {
     const data = req.validatedBody;
 
+    const username = data.username || data.USERNAME;
+    const email = data.email || data.EMAIL;
+    const password = data.password || data.PASSWORD;
+
     const existingUser = await prisma.user.findFirst({
         where: {
             OR: [
-                { username: data.username },
-                { email: data.email },
+                { username },
+                { email },
             ],
         },
     });
@@ -20,12 +24,12 @@ exports.signUp = async (req, res) => {
         return res.status(409).json({ message: 'Username or email is already registered.' });
     }
 
-    const hashedPassword = await bcrypt.hash(data.password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await prisma.user.create({
         data: {
-            username: data.username,
-            email: data.email,
+            username,
+            email,
             passwordHash: hashedPassword,
         },
     });
@@ -40,15 +44,18 @@ exports.signUp = async (req, res) => {
 exports.logIn = async (req, res) => {
     const data = req.validatedBody;
 
+    const username = data.username || data.USERNAME;
+    const password = data.password || data.PASSWORD;
+
     const user = await prisma.user.findUnique({
-        where: { username: data.username },
+        where: { username },
     });
 
     if (!user) {
         return res.status(401).json({ message: 'Invalid username or password.' });
     }
 
-    const isMatch = await bcrypt.compare(data.password, user.passwordHash);
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
 
     if (!isMatch) {
         return res.status(401).json({ message: 'Invalid username or password.' });

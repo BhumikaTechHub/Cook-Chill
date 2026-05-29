@@ -17,9 +17,12 @@ exports.renderProfile = render('profile', 'My Account | Cook & Chill', { activeP
 exports.renderSaved = render('saved', 'Saved | Cook & Chill', { activePage: 'saved' });
 exports.renderReview = render('review', 'Review | Cook & Chill', { activePage: 'review' });
 
+exports.renderPrivacy = render('privacy', 'Privacy Policy | Cook & Chill');
+exports.renderTerms = render('terms', 'Terms & Conditions | Cook & Chill');
+
 exports.renderCookLanding = render('cook1', 'Cook | Cook & Chill');
 exports.renderCookDiscover = render('cook2', 'Cook Discover | Cook & Chill');
-exports.renderCookUpload = render('cook3', 'Upload Recipe | Cook & Chill');
+// Upload page removed; renderCookUpload intentionally omitted.
 exports.renderCookReviews = render('cook4', 'Cook Reviews | Cook & Chill');
 
 exports.renderChillLanding = render('chill1', 'Chill | Cook & Chill');

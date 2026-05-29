@@ -19,6 +19,7 @@ body {
     max-width: 1200px;
     padding: 20px;
     margin-top: 30px;
+    
 }
 
 /* Header Section */
@@ -76,6 +77,7 @@ body {
     margin-bottom: 24px; /* Space below the section */
     box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
     min-height: 160px; /* flexible height */
+    margin-left: 300px;
 }
 
 .content-part {
@@ -97,22 +99,42 @@ body {
 }
 
 /* Section 2: Let's Talk Entertainment */
-
+.info-section{
+    
+    margin-left: 10px;
+    
+    margin-bottom: 24px; /* Space below the section */
+}
+.info-text{
+    font-size: 1.8em;
+    font-weight: 700;
+}
 
 .info-box {
     display: flex;
-    justify-content: space-between;
-    background-color: #41c3d4; /* Light blue background */
+    align-items: center;
+    gap: 40px;
+
+    width: 90%;
+    max-width: 1200px;
+
+    padding: 30px;
+    margin: 30px auto;
+
+    background: #41c3d4;
     border-radius: 20px;
-    padding: 20px;
     margin-bottom: 24px; /* Space below the section */
     box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
-    min-height: 140px; /* flexible height */
+    
 }
 .content-part {
     flex: 1;
-    padding: 20px;
+    padding: 30px;
     text: size 20%;;
+}
+.content-part h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
 }
 .image-part {
     flex: 1;
@@ -123,7 +145,7 @@ body {
 .info-image {
     max-width: 100%;
     border-radius: 20px;
-    height: 100%; /* Ensure image fills the height */
+    height: 50%; /* Ensure image fills the height */
 }
 
 /* Footer */
@@ -134,6 +156,10 @@ body {
     color: white;
     border-radius: 10px;
     margin-top: 50px;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    
+    
 }
 
 .footer p {
@@ -207,4 +233,5 @@ body {
     .footer-links a {
         font-size: 0.9em;
     }
+    
 }

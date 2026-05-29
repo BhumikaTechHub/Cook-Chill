@@ -99,20 +99,21 @@ body {
 }
 
 .bar {
-    min-height: 46px;
+    min-height: 40px;
     padding: 0.85rem 1rem;
     border-radius: 999px;
     background: linear-gradient(90deg, #1db596 0%, #13917a 100%);
     color: #fff;
-    font-weight: 700;
+    font-weight: 600;
+    text-align: left;
     transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.bar[data-stars="5"] { width: 80%; }
-.bar[data-stars="4"] { width: 65%; }
-.bar[data-stars="3"] { width: 25%; }
-.bar[data-stars="2"] { width: 13%; }
-.bar[data-stars="1"] { width: 8%; }
+.bar[data-stars="5"] { width: 80%; font-size: 1.6em; }
+.bar[data-stars="4"] { width: 65%;  font-size: 1.6em; }
+.bar[data-stars="3"] { width: 25%; font-size: 1.6em; }
+.bar[data-stars="2"] { width: 13%; font-size: 1.6em; }
+.bar[data-stars="1"] { width: 8%; font-size: 1.4em; }
 
 .bar:hover {
     transform: translateX(4px);

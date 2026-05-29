@@ -1,101 +1,217 @@
 <%- include('../partials/head', { title, stylesheet: '/CSS/homepage.css' }) %>
 
-<div class="main">
-    <div class="background-box"></div>
-
-    <div class="section2-container">
-        <img src="/IMAGES/About.webp" alt="About us" style="width: 300px; height: auto; border-radius: 23px; object-fit: cover;">
-        <div class="text-content">
-            <h2>ABOUT US</h2>
-            <div class="text1">
-                At Cook & Chill, our purpose is to showcase the best and most interesting aspects of arts and entertainment.
-                We bring you the latest news, reviews, and features on everything from movies and TV shows.
-            </div>
+    <div class="hero">
+        <div class="container-max">
+            <h1 class="title">Cook & Chill</h1>
         </div>
     </div>
-</div>
 
-<div class="box3">
-    <a href="/cook">
-        <img src="/IMAGES/Cooking.webp" alt="Cooking" class="img4">
-        <p>Welcome to Delicious Cooking</p>
-    </a>
-</div>
-
-<div class="container">
-    <a href="/cook">
-        <div class="boxes1">
-            Cook Whatever
-            You Want,
-            Anytime You
-            Want !
+    <section class="container-max section section--tight">
+        <div class="section2">
+            <img src="/IMAGES/About.webp" alt="About us" class="about-image">
+            <div class="text-content">
+                <h2>ABOUT US</h2>
+                <div class="text1">
+                    At Cook & Chill, our purpose is to showcase the best and most interesting aspects of arts and
+                    entertainment.
+                    We bring you the latest news, reviews, and features on everything from movies and TV shows.
+                </div>
+            </div>
         </div>
-    </a>
-    <a href="/cook/upload">
-        <div class="boxes2">
-            Upload Your
-            Own Recipe
-            and Share the
-            Flavor!
+    </section>
+
+    <section class="container-max section--tight">
+        <div class="box3">
+            <a href="/cook" class="box3-link">
+                <img src="/IMAGES/Cooking.webp" alt="Cooking" class="img4">
+                <p class="box3-title">Welcome to Delicious Cooking</p>
+            </a>
         </div>
+    </section>
+
+    <div class="container">
+        <a href="/cook">
+            <div class="boxes1">
+                Cook Whatever
+                You Want,
+                Anytime You
+                Want !
+            </div>
+        </a>
+        <a href="/cook/upload">
+            <div class="boxes2">
+                Upload Your
+                Own Recipe
+                and Share the
+                Flavor!
+            </div>
+        </a>
+        <a href="/cook/reviews">
+            <div class="boxes3">
+                Give Reviews,
+                Get Feedback,
+                and Perfect
+                Your Recipes!
+            </div>
+        </a>
+    </div>
+
+    <a href="/signup">
+        <button class="btn1">Start for Free</button>
     </a>
-    <a href="/cook/reviews">
-        <div class="boxes3">
-            Give Reviews,
-            Get Feedback,
-            and Perfect
-            Your Recipes!
+
+    <div class="boxbox4">
+        <a href="/chill">
+            <img src="/IMAGES/Korean Poetry.jpg" alt="Entertainment" class="img5">
+            <p>Lights, Camera, Snack-tion</p>
+        </a>
+    </div>
+
+    <div class="content-container">
+        <a href="/chill">
+            <div class="boxbox1">
+                <p>Top Reviews for All Your Entertainment Needs!</p>
+            </div>
+        </a>
+        <a href="/chill/discover">
+            <div class="boxbox2">
+                <p>Freely Share Your Thoughts on the Latest Movies!</p>
+            </div>
+        </a>
+        <a href="/chill/reviews">
+            <div class="boxbox6">
+                <p>Genre-Specific Recommendations and More!</p>
+            </div>
+        </a>
+    </div>
+
+
+
+
+
+    <!-- FAQ accordion: answers hidden by default, toggle visible on click -->
+    <section class="container-max section" aria-labelledby="faq-heading">
+        <div class="end">
+            <h2>Everything You Need to Know: Explore Our Comprehensive FAQs</h2>
         </div>
-    </a>
-</div>
+        <div class="card faq" style="margin-top:18px; padding:6px 18px;">
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq1">How can I upload my own recipe
+                    or review?</button>
+                <div id="faq1" class="faq-answer" hidden>
+                    <p>After logging in, go to the Cook section and use the "Share" or "Create" button to submit a
+                        recipe or review. Provide a title, description, optional image, and any tags. We review
+                        submissions before featuring them.</p>
+                </div>
+            </div>
 
-<a href="/signup">
-    <button class="btn1">Start for Free</button>
-</a>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq2">How do I get feedback on my
+                    recipe or review?</button>
+                <div id="faq2" class="faq-answer" hidden>
+                    <p>Community members can comment and rate your submission. To increase visibility, share quality
+                        images and clear steps — higher engagement brings more feedback.</p>
+                </div>
+            </div>
 
-<div class="boxbox4">
-    <a href="/chill">
-        <img src="/IMAGES/Korean Poetry.jpg" alt="Entertainment" class="img5">
-        <p>Lights, Camera, Snack-tion</p>
-    </a>
-</div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq3">What types of recipes and
+                    entertainment reviews can I submit?</button>
+                <div id="faq3" class="faq-answer" hidden>
+                    <p>Submit any home-cooked recipes, snacks, drinks, or entertainment reviews (concerts, movies,
+                        shows) that follow our community guidelines. Avoid copyrighted or commercial content without
+                        permission.</p>
+                </div>
+            </div>
 
-<div class="content-container">
-    <a href="/chill">
-        <div class="boxbox1">
-            <p>Top Reviews for All Your Entertainment Needs!</p>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq4">How do you choose featured
+                    recipes or reviews?</button>
+                <div id="faq4" class="faq-answer" hidden>
+                    <p>Featured items are chosen based on quality, originality, clear instructions, great photos, and
+                        positive community engagement. Staff picks and seasonal highlights also appear.</p>
+                </div>
+            </div>
         </div>
-    </a>
-    <a href="/chill/discover">
-        <div class="boxbox2">
-            <p>Freely Share Your Thoughts on the Latest Movies!</p>
-        </div>
-    </a>
-    <a href="/chill/reviews">
-        <div class="boxbox6">
-            <p>Genre-Specific Recommendations and More!</p>
-        </div>
-    </a>
-</div>
+    </section>
 
-<div class="end">
-    <h2>Everything You Need to Know: Explore Our Comprehensive FAQs</h2>
-</div>
+    <style>
+        .faq {
+            max-width: 980px;
+        }
 
-<hr>
+        .faq-item {
+            border-bottom: 1px solid #e6e6e6;
+        }
 
-<div class="questions">
-    <div class="ques1">How can I upload my own recipe or review?</div>
-    <hr>
-    <div class="ques2">How do I get feedback on my recipe or review?</div>
-    <hr>
-    <div class="ques3">What types of recipes and entertainment reviews can I submit?</div>
-    <hr>
-    <div class="ques4">How do you choose featured recipes or reviews?</div>
-    <hr>
-</div>
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            padding: 18px 6px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #16324a;
+            cursor: pointer;
+        }
 
-<%- include('../partials/app-footer') %>
+        .faq-question:hover {
+            color: #f4a23e;
+        }
 
-<script src="/JS/homepage.js"></script>
-<%- include('../partials/foot') %>
+        .faq-question:focus {
+            outline: 3px solid rgba(244, 162, 62, .15);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .26s ease;
+            padding: 0 6px;
+        }
+
+        .faq-answer p {
+            margin: 0 0 12px 0;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        @media (max-width:720px) {
+            .faq-question {
+                font-size: 20px;
+            }
+        }
+    </style>
+
+    <script>
+        (function () {
+            const buttons = document.querySelectorAll('.faq-question');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const expanded = btn.getAttribute('aria-expanded') === 'true';
+                    const content = document.getElementById(btn.getAttribute('aria-controls'));
+                    if (!content) return;
+                    if (expanded) {
+                        // collapse
+                        btn.setAttribute('aria-expanded', 'false');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        requestAnimationFrame(() => { content.style.maxHeight = '0px'; });
+                        content.addEventListener('transitionend', function handler() { content.hidden = true; content.removeEventListener('transitionend', handler); });
+                    } else {
+                        // expand
+                        content.hidden = false;
+                        btn.setAttribute('aria-expanded', 'true');
+                        const h = content.scrollHeight;
+                        content.style.maxHeight = '0px';
+                        requestAnimationFrame(() => { content.style.maxHeight = h + 'px'; });
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <%- include('../partials/app-footer') %>
+
+        <script src="/JS/homepage.js"></script>
+        <%- include('../partials/foot') %>

@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <p>${recipe.category}</p>
                     <p>${recipe.tags.join(', ')}</p>
                 </div>
-                <a class="secondary-button" href="/cook/upload">Manage</a>
+                <a class="secondary-button" href="/cook">Manage</a>
             </article>
         `).join('');
     }

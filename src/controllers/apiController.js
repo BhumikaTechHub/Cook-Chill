@@ -188,9 +188,17 @@ exports.getProfile = async (req, res) => {
 exports.updateProfile = async (req, res) => {
     const data = req.validatedBody;
 
+    // Normalize incoming field names (validation schema uses uppercase keys)
+    const { FULLNAME, PHONE, DATE_OF_BIRTH } = data;
+
+    const updateData = {};
+    if (typeof FULLNAME !== 'undefined') updateData.fullName = FULLNAME;
+    if (typeof PHONE !== 'undefined') updateData.phone = PHONE;
+    if (typeof DATE_OF_BIRTH !== 'undefined') updateData.dateOfBirth = DATE_OF_BIRTH;
+
     const user = await prisma.user.update({
         where: { id: req.user.id },
-        data,
+        data: updateData,
     });
 
     res.json({

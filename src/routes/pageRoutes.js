@@ -17,7 +17,6 @@ const legacyRedirects = {
     '/review.html': '/review',
     '/cook1.html': '/cook',
     '/cook2.html': '/cook/discover',
-    '/cook3.html': '/cook/upload',
     '/cook4.html': '/cook/reviews',
     '/chill1.html': '/chill',
     '/chill2.html': '/chill/discover',
@@ -39,7 +38,6 @@ router.get('/Cook&Chill/*', (req, res) => {
 
 router.get('/cook/1', (req, res) => res.redirect(301, '/cook'));
 router.get('/cook/2', (req, res) => res.redirect(301, '/cook/discover'));
-router.get('/cook/3', (req, res) => res.redirect(301, '/cook/upload'));
 router.get('/cook/4', (req, res) => res.redirect(301, '/cook/reviews'));
 router.get('/chill/1', (req, res) => res.redirect(301, '/chill'));
 router.get('/chill/2', (req, res) => res.redirect(301, '/chill/discover'));
@@ -56,11 +54,16 @@ router.get('/review', requirePageAuth, pageController.renderReview);
 
 router.get('/cook', pageController.renderCookLanding);
 router.get('/cook/discover', pageController.renderCookDiscover);
-router.get('/cook/upload', requirePageAuth, pageController.renderCookUpload);
+router.get('/cook/3', (req, res) => res.redirect(301, '/cook'));
+// Upload page removed. Redirects to /cook
+// router.get('/cook/upload', requirePageAuth, pageController.renderCookUpload);
 router.get('/cook/reviews', pageController.renderCookReviews);
 
 router.get('/chill', pageController.renderChillLanding);
 router.get('/chill/discover', pageController.renderChillDiscover);
 router.get('/chill/reviews', pageController.renderChillReviews);
+
+router.get('/privacy', pageController.renderPrivacy);
+router.get('/terms', pageController.renderTerms);
 
 module.exports = router;

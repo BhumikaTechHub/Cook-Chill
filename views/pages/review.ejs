@@ -13,13 +13,31 @@
         <h1>REVIEW</h1>
 
         <div class="review-column">
-            <h2>Film Reviews</h2>
-            <div class="box">
-                <img src="/IMAGES/Korean Poetry.jpg" alt="Film Review" class="review-pic">
+            <h2>Website Feedback</h2>
+            <div class="box card">
+                <form id="site-feedback-form">
+                    <p>Please tell us what you liked, disliked, and what could be improved. Your feedback helps us make Cook & Chill better.</p>
+
+                    <label for="like">What did you like?</label>
+                    <textarea id="like" name="like" rows="3" placeholder="What worked well..." required></textarea>
+
+                    <label for="dislike">What did you dislike?</label>
+                    <textarea id="dislike" name="dislike" rows="3" placeholder="What didn't work for you..." required></textarea>
+
+                    <label for="improve">What can be improved?</label>
+                    <textarea id="improve" name="improve" rows="3" placeholder="Suggestions for improvement..." required></textarea>
+
+                    <div style="margin-top:12px; display:flex; gap:12px;">
+                        <button type="submit" id="feedback-submit" class="action-button">Submit Feedback</button>
+                        <button type="reset" class="secondary-button">Clear</button>
+                    </div>
+
+                    <p id="feedbackMessage" aria-live="polite" style="margin-top:12px"></p>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<script src="/JS/review.js"></script>
+<script src="/JS/review-feedback.js"></script>
 <%- include('../partials/foot') %>
