@@ -5,40 +5,51 @@ const { getAuthCookieOptions, TOKEN_COOKIE_NAME, signAuthToken } = require('../l
 const { serializeUser } = require('../utils/serializers');
 
 exports.signUp = async (req, res) => {
-    const data = req.validatedBody;
+    try {
+        const data = req.validatedBody;
 
-    const username = data.username || data.USERNAME;
-    const email = data.email || data.EMAIL;
-    const password = data.password || data.PASSWORD;
+        console.log("Signup request:", data);
 
-    const existingUser = await prisma.user.findFirst({
-        where: {
-            OR: [
-                { username },
-                { email },
-            ],
-        },
-    });
+        const username = data.username || data.USERNAME;
+        const email = data.email || data.EMAIL;
+        const password = data.password || data.PASSWORD;
 
-    if (existingUser) {
-        return res.status(409).json({ message: 'Username or email is already registered.' });
+        const existingUser = await prisma.user.findFirst({
+            where: {
+                OR: [
+                    { username },
+                    { email },
+                ],
+            },
+        });
+
+        if (existingUser) {
+            return res.status(409).json({
+                message: 'Username or email is already registered.',
+            });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const user = await prisma.user.create({
+            data: {
+                username,
+                email,
+                passwordHash: hashedPassword,
+            },
+        });
+
+        res.status(201).json({
+            message: 'User signed up successfully.',
+            redirectTo: '/login',
+            user: serializeUser(user),
+        });
+    } catch (error) {
+        console.error("SIGNUP ERROR:", error);
+        return res.status(500).json({
+            message: error.message,
+        });
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const user = await prisma.user.create({
-        data: {
-            username,
-            email,
-            passwordHash: hashedPassword,
-        },
-    });
-
-    res.status(201).json({
-        message: 'User signed up successfully.',
-        redirectTo: '/login',
-        user: serializeUser(user),
-    });
 };
 
 exports.logIn = async (req, res) => {
