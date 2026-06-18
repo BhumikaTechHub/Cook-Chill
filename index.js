@@ -1,6 +1,6 @@
 
 require('dotenv').config();
-
+app.set('trust proxy', 1);
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
  

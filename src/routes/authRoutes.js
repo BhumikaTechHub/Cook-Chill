@@ -8,8 +8,8 @@ const { loginSchema, signupSchema } = require('../validation/schemas');
 
 const router = express.Router();
 
-router.post('/signup', authLimiter, validate(signupSchema), asyncHandler(authController.signUp));
-router.post('/login', authLimiter, validate(loginSchema), asyncHandler(authController.logIn));
+router.post('/signup',  validate(signupSchema), asyncHandler(authController.signUp));
+router.post('/login', validate(loginSchema), asyncHandler(authController.logIn));
 router.post('/logout', asyncHandler(authController.logOut));
 
 module.exports = router;
