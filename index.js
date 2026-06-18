@@ -1,4 +1,4 @@
-console.log(process.env.DATABASE_URL);
+
 require('dotenv').config();
 
 const express = require("express");
