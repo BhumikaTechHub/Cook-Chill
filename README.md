@@ -1,207 +1,227 @@
-# Cook and Chill
+# Cook & Chill  
+Cook & Chill is a full-stack web application that combines recipe sharing and entertainment discovery into a single platform. Users can create accounts, explore recipes, save favorites, leave reviews, rate content, and manage their profiles through a secure and responsive interface.
 
-Cook and Chill is a multi-page full-stack web application that blends recipe sharing with entertainment discovery. The app is built with Node.js, Express, PostgreSQL, Prisma, EJS, and vanilla HTML/CSS/JS, and it keeps the original brand and page flow while delivering a cleaner production-ready architecture.
+## Live Demo
 
-## Demo
+**Live Application:** https://cook-chill-api.onrender.com
 
-- Live deployment: add your production URL here
-- Demo screenshots checklist: [docs/screenshots/README.md](docs/screenshots/README.md)
+**GitHub Repository:** https://github.com/BhumikaTechHub/Cook-Chill
 
-Recommended capture set:
+---
 
-- Homepage desktop
-- Homepage mobile
-- Cook discovery page
-- Recipe upload studio
-- Saved favorites dashboard
-- Login and signup flow
+##  Features
 
-## Feature Highlights
+### Authentication & Security
 
-- JWT-based authentication with secure password hashing
-- PostgreSQL + Prisma data layer for users, recipes, favorites, ratings, and reviews
-- Protected profile, saved items, and recipe management routes
-- Favorites synced to authenticated user accounts instead of localStorage
-- Search, sort, and filter flows for recipe and entertainment discovery
-- Responsive EJS-rendered pages with reusable partials
-- Helmet, rate limiting, request logging, validation, and centralized error handling
+* Secure user registration and login
+* JWT-based authentication
+* Password hashing and protected routes
+* Session persistence using HTTP-only cookies
 
-## Tech Stack
+### Recipe Management
 
-- Node.js
-- Express.js
-- PostgreSQL
-- Prisma ORM
-- EJS
-- Vanilla HTML, CSS, and JavaScript
-- JWT Authentication
+* Create, view, edit, and delete recipes
+* Categorize recipes by meal type
+* Search and discover recipes easily
+* Personalized recipe management dashboard
+
+### Reviews & Ratings
+
+* Submit reviews and ratings
+* Community-driven feedback system
+* Dynamic review and rating management
+
+### Favorites
+
+* Save favorite recipes and entertainment content
+* Favorites synchronized with user accounts
+* Persistent storage using PostgreSQL
+
+### User Profiles
+
+* Update profile information
+* Manage saved content
+* Secure password update functionality
+
+### Responsive Design
+
+* Mobile-friendly layouts
+* Reusable EJS components
+* Optimized user experience across devices
+
+---
+
+##  Tech Stack
+
+### Frontend
+
+* EJS
+* HTML5
+* CSS3
+* JavaScript
+
+### Backend
+
+* Node.js
+* Express.js
+
+### Database
+
+* PostgreSQL
+* Prisma ORM
+
+### Authentication
+
+* JWT (JSON Web Tokens)
+* bcrypt
+
+### Deployment
+
+* Render
+* Neon PostgreSQL
+
+---
 
 ## Architecture
 
 ```text
+Client Browser
+      │
+      ▼
+Express + EJS
+      │
+      ▼
+REST API Layer
+      │
+      ▼
+Prisma ORM
+      │
+      ▼
+PostgreSQL (Neon)
+```
+
+---
+
+##  Project Structure
+
+```text
 Cook-Chill/
-|-- docs/
-|   `-- screenshots/
-|-- prisma/
-|   |-- migrations/
-|   `-- schema.prisma
-|-- public/
-|   |-- CSS/
-|   |-- IMAGES/
-|   |-- JS/
-|   `-- JSON/
-|-- src/
-|   |-- app.js
-|   |-- config/
-|   |-- controllers/
-|   |-- lib/
-|   |-- middleware/
-|   |-- routes/
-|   |-- utils/
-|   `-- validation/
-|-- views/
-|   |-- pages/
-|   `-- partials/
-|-- .env.example
-|-- index.js
-|-- package.json
-`-- render.yaml
+├── prisma/
+├── public/
+│   ├── CSS/
+│   ├── JS/
+│   ├── IMAGES/
+│   └── JSON/
+├── src/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── routes/
+│   ├── validation/
+│   └── utils/
+├── views/
+│   ├── pages/
+│   └── partials/
+├── index.js
+├── package.json
+└── prisma/schema.prisma
 ```
 
-## Environment Setup
+---
 
-Copy `.env.example` to `.env` and configure:
+##  Database Design
+
+The application uses PostgreSQL with Prisma ORM and includes:
+
+* Users
+* Recipes
+* Reviews
+* Ratings
+* Favorites
+
+Relationships are managed using Prisma's relational data model for efficient querying and scalability.
+
+---
+
+##  Local Setup
+
+### Clone Repository
 
 ```bash
+git clone https://github.com/BhumikaTechHub/Cook-Chill.git
+cd Cook-Chill
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Configure Environment Variables
+
+Create a `.env` file:
+
+```env
 PORT=4000
-NODE_ENV=development
-APP_URL=http://localhost:4000
-CORS_ORIGIN=http://localhost:4000
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/cook_chill?schema=public
-JWT_SECRET=replace-with-a-strong-secret
+DATABASE_URL=your_postgresql_connection_string
+JWT_SECRET=your_secret_key
 ```
 
-Notes:
-
-- `APP_URL` is used for environment-aware redirects and server logs.
-- `CORS_ORIGIN` accepts a comma-separated list for multi-origin setups.
-- For Neon or Supabase, paste the provided PostgreSQL connection string into `DATABASE_URL`.
-
-## Local Development
-
-1. Install dependencies.
+### Generate Prisma Client
 
 ```bash
-npm install
+npx prisma generate
 ```
 
-2. Generate the Prisma client.
+### Sync Database
 
 ```bash
-npm run prisma:generate
+npx prisma db push
 ```
 
-3. Apply local migrations.
+### Start Application
 
 ```bash
-npm run prisma:migrate -- --name init
-```
-
-4. Start the development server.
-
-```bash
-npm run dev
-```
-
-5. Open `http://localhost:4000`.
-
-## Prisma Commands
-
-- `npm run prisma:generate`
-- `npm run prisma:migrate -- --name init`
-- `npm run prisma:deploy`
-- `npm run prisma:studio`
-
-## API Overview
-
-Public endpoints:
-
-- `POST /signup`
-- `POST /login`
-- `POST /logout`
-- `GET /api/homepage`
-- `GET /api/cook1`
-- `GET /api/chill1`
-- `GET /api/recipes`
-- `GET /api/reviews`
-- `GET /api/ratings`
-
-Protected endpoints:
-
-- `POST /api/recipes`
-- `PUT /api/recipes/:id`
-- `DELETE /api/recipes/:id`
-- `GET /api/profile`
-- `PUT /api/profile`
-- `PATCH /api/profile/password`
-- `GET /api/favorites`
-- `POST /api/favorites`
-- `DELETE /api/favorites/:id`
-- `POST /api/reviews`
-- `POST /api/ratings`
-
-## Authentication Flow
-
-- Users sign up with `USERNAME`, `EMAIL`, and `PASSWORD`.
-- Login issues a JWT and stores it in an `httpOnly` cookie.
-- Protected pages redirect unauthenticated visitors to `/login`.
-- Protected APIs return `401` JSON responses that frontend scripts handle gracefully.
-
-## Deployment
-
-### Render
-
-This repository includes [render.yaml](render.yaml) for a straightforward Render deploy.
-
-Set these environment variables in Render:
-
-- `NODE_ENV=production`
-- `APP_URL=https://your-render-domain.onrender.com`
-- `CORS_ORIGIN=https://your-render-domain.onrender.com`
-- `DATABASE_URL=your-neon-or-supabase-postgres-url`
-- `JWT_SECRET=your-long-random-secret`
-
-Build/start commands:
-
-```bash
-npm install
-npm run prisma:generate
-npm run prisma:deploy
 npm start
 ```
 
-### Railway
+Application will run on:
 
-- Provision a PostgreSQL database or connect Neon.
-- Set the same environment variables listed above.
-- Use `npm start` as the start command.
-- Add `npm run prisma:deploy` to the deployment pipeline before the app starts.
+```text
+http://localhost:4000
+```
 
-### Vercel
+---
 
-- Prefer Render or Railway for the Express server.
-- If using Vercel for frontend assets only, point API traffic to the hosted Express backend and keep `CORS_ORIGIN` in sync.
+##  Key Highlights
 
-## Portfolio Notes
+* Full-stack application deployed in production
+* PostgreSQL database hosted on Neon
+* Secure JWT authentication system
+* Prisma ORM integration
+* Responsive user interface
+* Persistent user favorites, ratings, and reviews
+* Production deployment using Render
 
-- Add polished screenshots to `docs/screenshots/`.
-- Seed a few realistic recipes and entertainment picks before recording a demo.
-- Add a live deployment link near the top of this README once the app is hosted.
-- Mention the PostgreSQL + Prisma migration and favorites sync in your project description for interviews.
+---
 
-## Production-Ready Recommendations
+##   Future Improvements
 
-- Add integration tests for auth, favorites, and recipe CRUD.
-- Add pagination for larger recipe and review datasets.
-- Add image upload/storage if you want richer recipe cards later.
-- Add a small seed script so reviewers can bootstrap realistic demo content quickly.
+* Image upload support for recipes
+* Social sharing functionality
+* Advanced search and filtering
+* Pagination and performance optimization
+* Recipe recommendation engine
+* Admin dashboard and moderation tools
+
+---
+
+##  Author
+
+**Bhumika Yadav**
+
+LinkedIn: https://www.linkedin.com/in/bhumika-yadav-826255296/
+
+GitHub: https://github.com/BhumikaTechHub
+
+Email: [bhumikay885@gmail.com](mailto:bhumikay885@gmail.com)
