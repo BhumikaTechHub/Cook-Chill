@@ -7,29 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Category {
-  Breakfast
-  Lunch
-  Dinner
-  Dessert
-}
-
-enum ReviewTargetType {
-  RECIPE
-  ENTERTAINMENT
-  GENERAL
-}
-
-enum FavoriteTargetType {
-  RECIPE
-  ENTERTAINMENT
-}
-
-enum RatingTargetType {
-  RECIPE
-  ENTERTAINMENT
-}
-
 model User {
   id           String     @id @default(cuid())
   username     String     @unique
@@ -40,10 +17,10 @@ model User {
   dateOfBirth  DateTime?
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  recipes      Recipe[]
   favorites    Favorite[]
-  reviews      Review[]
   ratings      Rating[]
+  recipes      Recipe[]
+  reviews      Review[]
 
   @@map("users")
 }
@@ -58,9 +35,9 @@ model Recipe {
   authorId    String?
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  author      User?      @relation(fields: [authorId], references: [id], onDelete: SetNull)
   favorites   Favorite[]
   ratings     Rating[]
+  author      User?      @relation(fields: [authorId], references: [id])
   reviews     Review[]
 
   @@index([authorId])
@@ -76,9 +53,9 @@ model Review {
   comment     String
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
+  ratings     Rating[]
   recipe      Recipe?          @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  ratings     Rating[]
 
   @@index([userId])
   @@index([recipeId])
@@ -120,4 +97,27 @@ model Rating {
   @@index([recipeId])
   @@index([reviewId])
   @@map("ratings")
+}
+
+enum Category {
+  Breakfast
+  Lunch
+  Dinner
+  Dessert
+}
+
+enum ReviewTargetType {
+  RECIPE
+  ENTERTAINMENT
+  GENERAL
+}
+
+enum FavoriteTargetType {
+  RECIPE
+  ENTERTAINMENT
+}
+
+enum RatingTargetType {
+  RECIPE
+  ENTERTAINMENT
 }
