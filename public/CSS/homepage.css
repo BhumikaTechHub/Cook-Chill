@@ -176,9 +176,9 @@ nav button {
     align-items: center;
     gap: 22px;
 }
-
+ 
 .boxes1, .boxes2, .boxes3 {
-    font-size: 1.15em;
+   /* font-size: 1.15em;
     border: 2px solid rgba(241,159,97,0.9);
     background-color: #f9a26c;
     color: black;
@@ -186,6 +186,19 @@ nav button {
     max-width: 320px;
     border-radius: 18px;
     padding: 18px;
+    text-align: center;*/
+    margin: 0 auto;
+    font-size: 1.25em;
+    border: 2px solid rgba(241,159,97,0.9);
+    background-color: #f9a26c;
+    margin-top: 28px;
+    border-radius: 36px;
+    width: min(100%, 580px);
+    padding: 28px;
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 
@@ -201,6 +214,7 @@ nav button {
 
 .boxbox4 {
     margin: 0 auto;
+    font-size: 1.35em;
     border: 2px solid rgba(21, 187, 176, 0.54);
     margin-top: 28px;
     border-radius: 36px;
