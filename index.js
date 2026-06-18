@@ -3,8 +3,7 @@ require('dotenv').config();
 
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
-
-console.log(process.env.DATABASE_URL);
+ 
 
 const app = require('./src/app');
 const connectDatabase = require('./src/config/db');
