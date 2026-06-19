@@ -26,15 +26,26 @@
             ...options,
         });
 
+        const text = await response.text();
+
+        console.log("STATUS:", response.status);
+        console.log("RESPONSE:", text);
+
         let data = null;
+
         try {
-            data = await response.json();
-        } catch (error) {
-            data = null;
+            data = JSON.parse(text);
+        } catch {
+            data = text;
         }
 
         if (!response.ok) {
-            const error = new Error((data && data.message) || 'Request failed.');
+            const error = new Error(
+                (data && data.message) ||
+                text ||
+                'Request failed.'
+            );
+
             error.status = response.status;
             error.data = data;
             throw error;
