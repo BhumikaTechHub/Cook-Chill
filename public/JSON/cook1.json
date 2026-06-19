@@ -16,15 +16,7 @@
             "textColor": "#ffffff",
             "fontSize": "50px"
         },
-        {
-            "link": "/cook",
-            "text": "SHARE YOUR CULINARY CREATIONS",
-            "image": "/IMAGES/upload.jpeg",
-            "alt": "Upload Image",
-            "bgColor": "#f4a23e",
-            "textColor": "#ffffff",
-            "fontSize": "50px"
-        },
+       
         {
             "link": "/cook/reviews",
             "text": "SHARE YOUR FOODIE THOUGHTS",

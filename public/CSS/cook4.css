@@ -113,7 +113,7 @@ body {
 .bar[data-stars="4"] { width: 65%;  font-size: 1.6em; }
 .bar[data-stars="3"] { width: 25%; font-size: 1.6em; }
 .bar[data-stars="2"] { width: 13%; font-size: 1.6em; }
-.bar[data-stars="1"] { width: 8%; font-size: 1.4em; }
+.bar[data-stars="1"] { width: 12%; font-size: 1.5em; }
 
 .bar:hover {
     transform: translateX(4px);

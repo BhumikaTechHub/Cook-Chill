@@ -281,7 +281,7 @@ nav button {
 .content-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
+    gap: 10px;
     padding: 20px;
     align-items: start;
     justify-items: center;
